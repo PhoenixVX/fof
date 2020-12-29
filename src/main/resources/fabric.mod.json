@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "FOF",
+  "id": "fof",
   "version": "${version}",
-  "name": "FOF",
+  "name": "Forge of Fiends",
   "description": "",
   "authors": [
     "PheonixVX",
@@ -10,7 +10,7 @@
   ],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/FOF/icon.png",
+  "icon": "assets/fof/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
