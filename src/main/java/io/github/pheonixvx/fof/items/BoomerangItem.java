@@ -1,11 +1,11 @@
 package io.github.pheonixvx.fof.items;
 
+import io.github.pheonixvx.fof.entity.BoomerangEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
-import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -26,7 +26,7 @@ public class BoomerangItem extends Item {
 			// Spawn the entity only on the server thread.
 			BoomerangEntity boomerangEntity = new BoomerangEntity(world, playerEntity);
 			boomerangEntity.setItem(itemStack);
-			boomerangEntity.setProperties(playerEntity, playerEntity.pitch - 15f, playerEntity.yaw, 0.0F, 1.0F, 0F);
+			boomerangEntity.setProperties(playerEntity, playerEntity.pitch - 15f, playerEntity.yaw, 0.0F, 1.0F, 1.5F);
 			world.spawnEntity(boomerangEntity);
 		}
 

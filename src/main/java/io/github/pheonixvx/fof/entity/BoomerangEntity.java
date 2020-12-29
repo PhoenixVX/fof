@@ -1,4 +1,4 @@
-package io.github.pheonixvx.fof.items;
+package io.github.pheonixvx.fof.entity;
 
 import io.github.pheonixvx.fof.client.FOFClient;
 import io.github.pheonixvx.fof.entity.EntitySpawnPacket;
@@ -7,6 +7,7 @@ import io.github.pheonixvx.fof.registry.RegistryItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
@@ -15,6 +16,8 @@ import net.minecraft.network.Packet;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BoomerangEntity extends ThrownItemEntity {
 
@@ -51,6 +54,12 @@ public class BoomerangEntity extends ThrownItemEntity {
 		if (entity instanceof LivingEntity) {
 			LivingEntity livingEntity = (LivingEntity) entity;
 			livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 40));
+			Random random = new Random();
+			if (random.nextFloat() < 0.95f) {
+				livingEntity.damage(DamageSource.GENERIC, 9);
+			} else {
+				livingEntity.damage(DamageSource.GENERIC, 7);
+			}
 		}
 	}
 
