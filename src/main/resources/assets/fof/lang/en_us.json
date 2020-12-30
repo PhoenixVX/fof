@@ -1,5 +1,8 @@
 {
   "itemGroup.fof.item_group": "Forge of Fiends",
   "item.fof.fof_boomerang": "Boomerang",
-  "item.fof.fof_bomb": "Bomb"
+  "item.fof.fof_bomb": "Bomb",
+  "item.fof.fof_zuubee": "Zuubee",
+  "block.fof.fof_zuubee_mound": "Zuubee Mound",
+  "block.fof.fof_zuubee_block": "Zuubee Block"
 }

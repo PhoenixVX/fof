@@ -1,5 +1,6 @@
 package io.github.pheonixvx.fof.registry;
 
+import io.github.pheonixvx.fof.FOF;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -14,8 +15,13 @@ public class RegistryHandler {
 		.build();
 
 	public static void initializeRegistries() {
+		FOF.LOGGER.info("Initializing Items");
 		RegistryItem.initializeItems();
+		FOF.LOGGER.info("Initializing Blocks");
 		RegistryBlock.initializeBlocks();
+		FOF.LOGGER.info("Intializing Entities");
 		RegistryEntity.initializeEntities();
+		FOF.LOGGER.info("Initializing Ores");
+		RegistryOres.initializeOres();
 	}
 }

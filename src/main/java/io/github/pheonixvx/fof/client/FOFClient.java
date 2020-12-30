@@ -1,14 +1,17 @@
 package io.github.pheonixvx.fof.client;
 
 import io.github.pheonixvx.fof.entity.EntitySpawnPacket;
+import io.github.pheonixvx.fof.registry.RegistryBlock;
 import io.github.pheonixvx.fof.registry.RegistryEntity;
 import io.github.pheonixvx.fof.registry.RegistryHandler;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -33,6 +36,7 @@ public class FOFClient implements ClientModInitializer {
 		EntityRendererRegistry.INSTANCE.register(
 			RegistryEntity.BOMB_ENTITY_TYPE, (dispatcher, context) ->
 				new FlyingItemEntityRenderer(dispatcher, context.getItemRenderer()));
+		BlockRenderLayerMap.INSTANCE.putBlock(RegistryBlock.FOF_ZUUBEE_MOUND, RenderLayer.getCutout());
 	}
 
 	public void receiveEntityPacket() {
