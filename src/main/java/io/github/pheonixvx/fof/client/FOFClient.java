@@ -1,6 +1,7 @@
 package io.github.pheonixvx.fof.client;
 
 import io.github.pheonixvx.fof.entity.EntitySpawnPacket;
+import io.github.pheonixvx.fof.entity.renderers.DwellerBugRenderer;
 import io.github.pheonixvx.fof.registry.RegistryBlock;
 import io.github.pheonixvx.fof.registry.RegistryEntity;
 import io.github.pheonixvx.fof.registry.RegistryHandler;
@@ -29,14 +30,22 @@ public class FOFClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient () {
+		// Blocks
+		BlockRenderLayerMap.INSTANCE.putBlock(RegistryBlock.FOF_ZUUBEE_MOUND, RenderLayer.getCutout());
+
+		// Entities
 		EntityRendererRegistry.INSTANCE.register(
 			RegistryEntity.BOOMERANG_ENTITY_TYPE, (dispatcher, context) ->
 				new FlyingItemEntityRenderer(dispatcher, context.getItemRenderer()));
-			receiveEntityPacket();
 		EntityRendererRegistry.INSTANCE.register(
 			RegistryEntity.BOMB_ENTITY_TYPE, (dispatcher, context) ->
 				new FlyingItemEntityRenderer(dispatcher, context.getItemRenderer()));
-		BlockRenderLayerMap.INSTANCE.putBlock(RegistryBlock.FOF_ZUUBEE_MOUND, RenderLayer.getCutout());
+
+		EntityRendererRegistry.INSTANCE.register(
+			RegistryEntity.DWELLER_BUG_ENTITY_TYPE,
+				(dispatcher, context) -> new DwellerBugRenderer(dispatcher)
+		);
+		receiveEntityPacket();
 	}
 
 	public void receiveEntityPacket() {

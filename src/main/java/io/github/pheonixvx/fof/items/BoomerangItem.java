@@ -28,12 +28,12 @@ public class BoomerangItem extends Item {
 			boomerangEntity.setItem(itemStack);
 			boomerangEntity.setProperties(playerEntity, playerEntity.pitch - 15f, playerEntity.yaw, 0.0F, 1.0F, 1.5F);
 			world.spawnEntity(boomerangEntity);
-		}
 
-		playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
-		if (!playerEntity.abilities.creativeMode) {
-			// Damage the boomerang after throwing
-			itemStack.damage(1, world.random, (ServerPlayerEntity) playerEntity);
+			playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
+			if (!playerEntity.abilities.creativeMode) {
+				// Damage the boomerang after throwing
+				itemStack.damage(1, (ServerPlayerEntity) playerEntity, (entity) -> {});
+			}
 		}
 
 		return TypedActionResult.success(playerEntity.getStackInHand(hand));

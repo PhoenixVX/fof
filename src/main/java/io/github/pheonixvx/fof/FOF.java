@@ -4,6 +4,7 @@ import io.github.pheonixvx.fof.registry.RegistryHandler;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.bernie.geckolib3.GeckoLib;
 
 public class FOF implements ModInitializer {
 
@@ -13,6 +14,7 @@ public class FOF implements ModInitializer {
 	public void onInitialize () {
 		LOGGER.info("Forge of Fiends is loading...");
 		RegistryHandler.initializeRegistries();
+		GeckoLib.initialize();
 	}
 
 }
