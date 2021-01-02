@@ -1,6 +1,6 @@
 {
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "fof:item/fof_bomb"
-  }
+	"parent": "fof:item/fof_bomb_model",
+	"textures": {
+		"missing": "fof:item/fof_bomb"
+	}
 }

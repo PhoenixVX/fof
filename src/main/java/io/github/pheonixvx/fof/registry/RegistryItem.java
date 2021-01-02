@@ -15,7 +15,7 @@ public class RegistryItem {
 	public static final Item FOF_BOOMERANG = new BoomerangItem(
 		new FabricItemSettings()
 			.group(RegistryHandler.ITEM_GROUP)
-			.maxDamage(9));
+			.maxDamage(251));
 
 	public static final Item FOF_BOMB = new BombItem(
 		new FabricItemSettings()
@@ -28,7 +28,6 @@ public class RegistryItem {
 			.group(RegistryHandler.ITEM_GROUP)
 			.rarity(Rarity.EPIC)
 	);
-
 
 	// Initialize Item Registry.
 	public static void initializeItems() {
@@ -61,6 +60,12 @@ public class RegistryItem {
 			Registry.ITEM,
 			new Identifier(RegistryHandler.MOD_ID, "fof_zuubee_block"),
 			new BlockItem(RegistryBlock.FOF_ZUUBEE_BLOCK,
+				new Item.Settings().group(RegistryHandler.ITEM_GROUP))
+		);
+		Registry.register(
+			Registry.ITEM,
+			new Identifier(RegistryHandler.MOD_ID, "fof_loot_grass"),
+			new BlockItem(RegistryBlock.FOF_LOOT_GRASS,
 				new Item.Settings().group(RegistryHandler.ITEM_GROUP))
 		);
 	}

@@ -1,5 +1,6 @@
 package io.github.pheonixvx.fof.registry;
 
+import io.github.pheonixvx.fof.entity.AbominationSkeletonEntity;
 import io.github.pheonixvx.fof.entity.BombEntity;
 import io.github.pheonixvx.fof.entity.BoomerangEntity;
 import io.github.pheonixvx.fof.entity.DwellerBugEntity;
@@ -8,10 +9,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
@@ -49,6 +47,14 @@ public class RegistryEntity {
 			.build()
 	);
 
+	public static final EntityType<AbominationSkeletonEntity> ABOMINATION_SKELETON_ENTITY_TYPE = Registry.register(
+		Registry.ENTITY_TYPE,
+		new Identifier(RegistryHandler.MOD_ID, "fof_abomination_skeleton"),
+		FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, AbominationSkeletonEntity::new)
+			.dimensions(EntityDimensions.fixed(1.25f, 2.75f))
+			.build()
+	);
+
 	public static void initializeEntities() {
 		FabricDefaultAttributeRegistry.register(
 			DWELLER_BUG_ENTITY_TYPE,
@@ -56,16 +62,22 @@ public class RegistryEntity {
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 7)
 		);
 
+		FabricDefaultAttributeRegistry.register(
+			ABOMINATION_SKELETON_ENTITY_TYPE,
+			AbominationSkeletonEntity.createMobAttributes()
+				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5)
+		);
+
 		// Spawning Restrictions
 		SpawnRestrictionAccessor.callRegister(
 			DWELLER_BUG_ENTITY_TYPE,
 			SpawnRestriction.Location.ON_GROUND,
-			Heightmap.Type.WORLD_SURFACE_WG,
+			Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
 			MobEntity::canMobSpawn
 		);
 
 		BiomeModifications.addSpawn(
-			biomeSelectionContext -> { return true; },
+			biomeSelectionContext -> true,
 			SpawnGroup.MONSTER,
 			DWELLER_BUG_ENTITY_TYPE,
 			10,

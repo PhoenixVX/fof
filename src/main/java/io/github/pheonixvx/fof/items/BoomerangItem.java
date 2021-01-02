@@ -20,7 +20,7 @@ public class BoomerangItem extends Item {
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand) {
 		ItemStack itemStack = playerEntity.getStackInHand(hand);
 		// Cooldown on item
-		playerEntity.getItemCooldownManager().set(this, 5);
+		playerEntity.getItemCooldownManager().set(this, 10);
 
 		if (!world.isClient) {
 			// Spawn the entity only on the server thread.

@@ -5,5 +5,7 @@
   "item.fof.fof_zuubee": "Zuübeë",
   "block.fof.fof_zuubee_mound": "Zuübeë Mound",
   "block.fof.fof_zuubee_block": "Zuübeë Block",
-  "entity.fof.fof_dweller_bug": "Dweller Bug"
+  "block.fof.fof_loot_grass": "Loot Grass",
+  "entity.fof.fof_dweller_bug": "Dweller Bug",
+  "entity.fof.fof_abomination_skeleton": "Abomination Skeleton"
 }

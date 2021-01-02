@@ -11,7 +11,7 @@ public class RegistryHandler {
 	public static String MOD_ID = "fof";
 	public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.create(
 		new Identifier(MOD_ID, "item_group"))
-		.icon(() -> new ItemStack(RegistryItem.FOF_BOOMERANG))
+		.icon(() -> new ItemStack(RegistryItem.FOF_ZUUBEE))
 		.build();
 
 	public static void initializeRegistries() {
