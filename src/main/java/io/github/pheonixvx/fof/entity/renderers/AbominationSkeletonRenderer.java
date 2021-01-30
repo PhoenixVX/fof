@@ -1,9 +1,7 @@
 package io.github.pheonixvx.fof.entity.renderers;
 
 import io.github.pheonixvx.fof.entity.AbominationSkeletonEntity;
-import io.github.pheonixvx.fof.entity.DwellerBugEntity;
 import io.github.pheonixvx.fof.entity.models.AbominationSkeletonModel;
-import io.github.pheonixvx.fof.entity.models.DwellerBugModel;
 import io.github.pheonixvx.fof.registry.RegistryHandler;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.util.Identifier;

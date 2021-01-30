@@ -6,7 +6,7 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -35,9 +35,9 @@ public class AbominationSkeletonEntity extends HostileEntity implements Monster,
 		// Entity will melee-attack
 		this.goalSelector.add(4, new EntityMeleeAttack(this, 1.0D, false, 8.0D));
 		// Entity will follow player
-		this.targetSelector.add(5, new FollowTargetGoal(this, PlayerEntity.class, true));
+		this.targetSelector.add(5, new FollowTargetGoal<>(this, PlayerEntity.class, true));
 		// Entity will attempt revenge
-		this.targetSelector.add(3, new RevengeGoal(this, new Class[0]));
+		this.targetSelector.add(3, new RevengeGoal(this));
 	}
 
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -55,7 +55,7 @@ public class AbominationSkeletonEntity extends HostileEntity implements Monster,
 	@Override
 	public void registerControllers (AnimationData animationData) {
 		animationData.addAnimationController(
-			new AnimationController(this, "controller", 0, this::predicate)
+			new AnimationController<>(this, "controller", 0, this::predicate)
 		);
 	}
 
