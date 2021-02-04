@@ -1,15 +1,15 @@
 package io.github.pheonixvx.fof.registry;
 
-import io.github.pheonixvx.fof.entity.AbominationSkeletonEntity;
-import io.github.pheonixvx.fof.entity.BombEntity;
-import io.github.pheonixvx.fof.entity.BoomerangEntity;
-import io.github.pheonixvx.fof.entity.DwellerBugEntity;
+import io.github.pheonixvx.fof.entity.*;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
@@ -55,6 +55,14 @@ public class RegistryEntity {
 			.build()
 	);
 
+	public static final EntityType<GoliathWolfEntity> GOLIATH_WOLF_ENTITY_TYPE = Registry.register(
+		Registry.ENTITY_TYPE,
+		new Identifier(RegistryHandler.MOD_ID, "fof_goliath_wolf"),
+		FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GoliathWolfEntity::new)
+			.dimensions(EntityDimensions.fixed(2.25f, 2.50f))
+			.build()
+	);
+
 	public static void initializeEntities() {
 		FabricDefaultAttributeRegistry.register(
 			DWELLER_BUG_ENTITY_TYPE,
@@ -68,9 +76,29 @@ public class RegistryEntity {
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5)
 		);
 
+		FabricDefaultAttributeRegistry.register(
+			GOLIATH_WOLF_ENTITY_TYPE,
+			GoliathWolfEntity.createMobAttributes()
+				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6)
+		);
+
 		// Spawning Restrictions
 		SpawnRestrictionAccessor.callRegister(
 			DWELLER_BUG_ENTITY_TYPE,
+			SpawnRestriction.Location.ON_GROUND,
+			Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+			MobEntity::canMobSpawn
+		);
+
+		SpawnRestrictionAccessor.callRegister(
+			ABOMINATION_SKELETON_ENTITY_TYPE,
+			SpawnRestriction.Location.ON_GROUND,
+			Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+			MobEntity::canMobSpawn
+		);
+
+		SpawnRestrictionAccessor.callRegister(
+			GOLIATH_WOLF_ENTITY_TYPE,
 			SpawnRestriction.Location.ON_GROUND,
 			Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
 			MobEntity::canMobSpawn
@@ -82,6 +110,24 @@ public class RegistryEntity {
 			DWELLER_BUG_ENTITY_TYPE,
 			10,
 			3,
+			7
+		);
+
+		BiomeModifications.addSpawn(
+			biomeSelectionContext -> true,
+			SpawnGroup.MONSTER,
+			ABOMINATION_SKELETON_ENTITY_TYPE,
+			15,
+			4,
+			6
+		);
+
+		BiomeModifications.addSpawn(
+			biomeSelectionContext -> true,
+			SpawnGroup.MONSTER,
+			GOLIATH_WOLF_ENTITY_TYPE,
+			12,
+			2,
 			7
 		);
 	}

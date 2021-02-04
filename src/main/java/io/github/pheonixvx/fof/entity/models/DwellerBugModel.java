@@ -13,14 +13,12 @@ public class DwellerBugModel extends AnimatedGeoModel<DwellerBugEntity> {
 	}
 
 	@Override
-	public Identifier getTextureLocation(DwellerBugEntity dwellerBugEntity)
-	{
+	public Identifier getTextureLocation(DwellerBugEntity dwellerBugEntity) {
 		return new Identifier(RegistryHandler.MOD_ID, "textures/entity/fof_dwellerbug.png");
 	}
 
 	@Override
-	public Identifier getAnimationFileLocation(DwellerBugEntity dwellerBugEntity)
-	{
+	public Identifier getAnimationFileLocation(DwellerBugEntity dwellerBugEntity) {
 		return new Identifier(RegistryHandler.MOD_ID, "animations/fof_dwellerbug.animation.json");
 	}
 }

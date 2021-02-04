@@ -15,11 +15,10 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class DwellerBugEntity extends HostileEntity implements Monster, IAnimatable {
-
+public class GoliathWolfEntity extends HostileEntity implements Monster, IAnimatable {
 	private final AnimationFactory animationFactory = new AnimationFactory(this);
 
-	public DwellerBugEntity (EntityType<? extends HostileEntity> entityType, World world) {
+	public GoliathWolfEntity (EntityType<? extends HostileEntity> entityType, World world) {
 		super(entityType, world);
 		this.ignoreCameraFrustum = true;
 	}
@@ -33,14 +32,13 @@ public class DwellerBugEntity extends HostileEntity implements Monster, IAnimata
 		// Entity will look around
 		this.goalSelector.add(5, new LookAroundGoal(this));
 		// Entity will melee-attack
-		this.goalSelector.add(4, new EntityMeleeAttack(this, 1.0D, false, 8.0D));
+		this.goalSelector.add(4, new EntityMeleeAttack(this, 0.75D, false, 8.0D));
 		// Entity will follow player
 		this.targetSelector.add(5, new FollowTargetGoal(this, PlayerEntity.class, true));
 		// Entity will attempt revenge
 		this.targetSelector.add(3, new RevengeGoal(this, new Class[0]));
 	}
 
-	// Animation stuff
 	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 		if (!(lastLimbDistance > -0.15F && lastLimbDistance < 0.15F) && !this.isAttacking()) {
 			event.getController().setAnimation(
@@ -54,11 +52,6 @@ public class DwellerBugEntity extends HostileEntity implements Monster, IAnimata
 			);
 			return PlayState.CONTINUE;
 		}
-		/*else if (this.isSpitting) {
-			event.getController().setAnimation(
-				new AnimationBuilder().addAnimation("spitting", true)
-			);
-		}*/
 		event.getController().setAnimation(
 			new AnimationBuilder().addAnimation("idle", true)
 		);
@@ -71,7 +64,7 @@ public class DwellerBugEntity extends HostileEntity implements Monster, IAnimata
 	}
 
 	@Override
-	public AnimationFactory getFactory() {
+	public AnimationFactory getFactory () {
 		return this.animationFactory;
 	}
 }

@@ -3,6 +3,7 @@ package io.github.pheonixvx.fof.client;
 import io.github.pheonixvx.fof.entity.EntitySpawnPacket;
 import io.github.pheonixvx.fof.entity.renderers.AbominationSkeletonRenderer;
 import io.github.pheonixvx.fof.entity.renderers.DwellerBugRenderer;
+import io.github.pheonixvx.fof.entity.renderers.GoliathWolfRenderer;
 import io.github.pheonixvx.fof.registry.RegistryBlock;
 import io.github.pheonixvx.fof.registry.RegistryEntity;
 import io.github.pheonixvx.fof.registry.RegistryHandler;
@@ -49,6 +50,10 @@ public class FOFClient implements ClientModInitializer {
 		EntityRendererRegistry.INSTANCE.register(
 			RegistryEntity.ABOMINATION_SKELETON_ENTITY_TYPE,
 				(dispatcher, context) -> new AbominationSkeletonRenderer(dispatcher)
+		);
+		EntityRendererRegistry.INSTANCE.register(
+			RegistryEntity.GOLIATH_WOLF_ENTITY_TYPE,
+				(dispatcher, context) -> new GoliathWolfRenderer(dispatcher)
 		);
 		receiveEntityPacket();
 	}
