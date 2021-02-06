@@ -3,7 +3,11 @@ package io.github.pheonixvx.fof.entity.renderers;
 import io.github.pheonixvx.fof.entity.GoliathWolfEntity;
 import io.github.pheonixvx.fof.entity.models.GoliathWolfModel;
 import io.github.pheonixvx.fof.registry.RegistryHandler;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.renderer.geo.GeoEntityRenderer;
 

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "fof",
-  "version": "${version}",
+  "version": "1.1-SNAPSHOT",
   "name": "Forge of Fiends",
   "description": "",
   "authors": [

@@ -126,7 +126,7 @@ public class RegistryEntity {
 			biomeSelectionContext -> true,
 			SpawnGroup.MONSTER,
 			GOLIATH_WOLF_ENTITY_TYPE,
-			4,
+			2,
 			2,
 			4
 		);
