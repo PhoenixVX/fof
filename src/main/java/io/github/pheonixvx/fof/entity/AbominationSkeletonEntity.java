@@ -6,7 +6,6 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -18,6 +17,8 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class AbominationSkeletonEntity extends HostileEntity implements Monster, IAnimatable {
 	private final AnimationFactory animationFactory = new AnimationFactory(this);
+	private boolean lowHealth;
+	private int ticks;
 
 	public AbominationSkeletonEntity (EntityType<? extends HostileEntity> entityType, World world) {
 		super(entityType, world);
@@ -48,6 +49,12 @@ public class AbominationSkeletonEntity extends HostileEntity implements Monster,
 			);
 			return PlayState.CONTINUE;
 		}
+		if (lowHealth) {
+			event.getController().setAnimation(
+				new AnimationBuilder().addAnimation("head_bounce", true)
+			);
+			return PlayState.CONTINUE;
+		}
 		event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", true));
 		return PlayState.CONTINUE;
 	}
@@ -62,5 +69,21 @@ public class AbominationSkeletonEntity extends HostileEntity implements Monster,
 	@Override
 	public AnimationFactory getFactory () {
 		return this.animationFactory;
+	}
+
+	@Override
+	public void tick () {
+		super.tick();
+		if (this.getHealth() == 5) {
+			this.lowHealth = true;
+		} else {
+			this.lowHealth = false;
+		}
+		ticks++;
+		// Heal automatically
+		if (lowHealth && this.ticks == 3000) {
+			ticks = 0;
+			this.setHealth(this.getHealth() + 5);
+		}
 	}
 }

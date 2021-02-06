@@ -3,9 +3,13 @@
   "item.fof.fof_boomerang": "Boomerang",
   "item.fof.fof_bomb": "Bomb",
   "item.fof.fof_zuubee": "Zuübeë",
+  "item.fof.fof_spawn_abomination_skeleton": "Abomination Skeleton Spawn Egg",
+  "item.fof.fof_spawn_goliath_wolf": "Goliath Wolf Spawn Egg",
+  "item.fof.fof_spawn_dweller_bug": "Dweller Bug Spawn Egg",
   "block.fof.fof_zuubee_mound": "Zuübeë Mound",
   "block.fof.fof_zuubee_block": "Zuübeë Block",
   "block.fof.fof_loot_grass": "Loot Grass",
   "entity.fof.fof_dweller_bug": "Dweller Bug",
-  "entity.fof.fof_abomination_skeleton": "Abomination Skeleton"
+  "entity.fof.fof_abomination_skeleton": "Abomination Skeleton",
+  "entity.fof.fof_goliath_wolf": "Goliath Wolf"
 }

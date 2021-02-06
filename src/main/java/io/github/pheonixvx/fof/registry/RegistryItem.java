@@ -5,6 +5,7 @@ import io.github.pheonixvx.fof.items.BoomerangItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
@@ -47,6 +48,24 @@ public class RegistryItem {
 			FOF_ZUUBEE
 		);
 
+		// Spawn eggs
+		Registry.register(
+			Registry.ITEM,
+			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_abomination_skeleton"),
+			new SpawnEggItem(RegistryEntity.ABOMINATION_SKELETON_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16)
+		));
+
+		Registry.register(
+			Registry.ITEM,
+			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_goliath_wolf"),
+			new SpawnEggItem(RegistryEntity.GOLIATH_WOLF_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16)
+		));
+
+		Registry.register(
+			Registry.ITEM,
+			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_dweller_bug"),
+			new SpawnEggItem(RegistryEntity.DWELLER_BUG_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16)
+		));
 
 
 		// Block Items
