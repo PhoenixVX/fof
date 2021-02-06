@@ -2,10 +2,11 @@ package io.github.pheonixvx.fof.registry;
 
 import io.github.pheonixvx.fof.items.BombItem;
 import io.github.pheonixvx.fof.items.BoomerangItem;
+import io.github.pheonixvx.fof.items.materials.CutlassToolMaterial;
+import io.github.pheonixvx.fof.items.materials.KatanaToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.*;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
@@ -16,7 +17,7 @@ public class RegistryItem {
 	public static final Item FOF_BOOMERANG = new BoomerangItem(
 		new FabricItemSettings()
 			.group(RegistryHandler.ITEM_GROUP)
-			.maxDamage(251));
+			.maxDamage(9));
 
 	public static final Item FOF_BOMB = new BombItem(
 		new FabricItemSettings()
@@ -28,6 +29,47 @@ public class RegistryItem {
 		new FabricItemSettings()
 			.group(RegistryHandler.ITEM_GROUP)
 			.rarity(Rarity.EPIC)
+	);
+
+	// Swords
+	public static final Item FOF_IRON_CUTLASS = new SwordItem(
+		new CutlassToolMaterial(325, 0F, 0F, 0, Ingredient.ofItems(Items.IRON_INGOT)),
+		5,
+		-2.4F,
+		new FabricItemSettings()
+			.group(RegistryHandler.ITEM_GROUP)
+			.rarity(Rarity.UNCOMMON)
+			.maxCount(1)
+	);
+
+	public static final Item FOF_DIAMOND_CUTLASS = new SwordItem(
+		new CutlassToolMaterial(1635, 0F, 0F, 0, Ingredient.ofItems(Items.DIAMOND)),
+		6,
+		-2.4F,
+		new FabricItemSettings()
+			.group(RegistryHandler.ITEM_GROUP)
+			.rarity(Rarity.UNCOMMON)
+			.maxCount(1)
+	);
+
+	public static final Item FOF_NETHERITE_CUTLASS = new SwordItem(
+		new CutlassToolMaterial(2105, 0F, 0F, 0, Ingredient.ofItems(Items.NETHER_GOLD_ORE)),
+		7,
+		-2.4F,
+		new FabricItemSettings()
+			.group(RegistryHandler.ITEM_GROUP)
+			.rarity(Rarity.UNCOMMON)
+			.maxCount(1)
+	);
+
+	public static final Item FOF_KATANA = new SwordItem(
+		new KatanaToolMaterial(1562, 0F, 0F, 0, 0, Ingredient.ofItems(Items.IRON_INGOT)),
+		5,
+		-2F,
+		new FabricItemSettings()
+			.group(RegistryHandler.ITEM_GROUP)
+			.rarity(Rarity.UNCOMMON)
+			.maxCount(1)
 	);
 
 	// Initialize Item Registry.
@@ -46,6 +88,31 @@ public class RegistryItem {
 			Registry.ITEM,
 			new Identifier(RegistryHandler.MOD_ID, "fof_zuubee"),
 			FOF_ZUUBEE
+		);
+
+		// Swords
+		Registry.register(
+			Registry.ITEM,
+			new Identifier(RegistryHandler.MOD_ID, "fof_iron_cutlass"),
+			FOF_IRON_CUTLASS
+		);
+
+		Registry.register(
+			Registry.ITEM,
+			new Identifier(RegistryHandler.MOD_ID, "fof_diamond_cutlass"),
+			FOF_DIAMOND_CUTLASS
+		);
+
+		Registry.register(
+			Registry.ITEM,
+			new Identifier(RegistryHandler.MOD_ID, "fof_netherite_cutlass"),
+			FOF_NETHERITE_CUTLASS
+		);
+
+		Registry.register(
+			Registry.ITEM,
+			new Identifier(RegistryHandler.MOD_ID, "fof_katana"),
+			FOF_KATANA
 		);
 
 		// Spawn eggs
