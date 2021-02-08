@@ -59,7 +59,7 @@ public class RegistryEntity {
 		Registry.ENTITY_TYPE,
 		new Identifier(RegistryHandler.MOD_ID, "fof_goliath_wolf"),
 		FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GoliathWolfEntity::new)
-			.dimensions(EntityDimensions.fixed(2.25f, 2.50f))
+			.dimensions(EntityDimensions.fixed(1.75f, 2.50f))
 			.build()
 	);
 
@@ -80,6 +80,7 @@ public class RegistryEntity {
 			GOLIATH_WOLF_ENTITY_TYPE,
 			GoliathWolfEntity.createMobAttributes()
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.10)
 		);
 
 		// Spawning Restrictions

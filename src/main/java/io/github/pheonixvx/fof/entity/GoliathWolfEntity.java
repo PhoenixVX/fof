@@ -1,28 +1,29 @@
 package io.github.pheonixvx.fof.entity;
 
 import io.github.pheonixvx.fof.entity.goals.EntityMeleeAttack;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.Saddleable;
+import net.minecraft.entity.SaddledComponent;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.Monster;
+import net.minecraft.entity.passive.HorseBaseEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.server.ServerConfigHandler;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -34,16 +35,17 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.List;
+import java.util.UUID;
 
-public class GoliathWolfEntity extends HostileEntity implements Monster, IAnimatable, Saddleable {
+public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnimatable, Saddleable {
 	private final AnimationFactory animationFactory = new AnimationFactory(this);
 	private final SaddledComponent saddledComponent;
 	private static final TrackedData<Boolean> SADDLED = DataTracker.registerData(GoliathWolfEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 	private static final TrackedData<Integer> BOOST_TIME = DataTracker.registerData(GoliathWolfEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
-	protected float jumpStrength;
+	protected float jumpStrength = 0.5F;
 
-	public GoliathWolfEntity (EntityType<? extends HostileEntity> entityType, World world) {
+	public GoliathWolfEntity (EntityType<? extends HorseBaseEntity> entityType, World world) {
 		super(entityType, world);
 		this.ignoreCameraFrustum = true;
 		this.saddledComponent = new SaddledComponent(this.dataTracker, BOOST_TIME, SADDLED);
@@ -106,12 +108,11 @@ public class GoliathWolfEntity extends HostileEntity implements Monster, IAnimat
 		super.tick();
 		Box box = this.getBoundingBox().expand(10, 10, 10);
 		List<WolfEntity> wolves = this.world.getEntitiesByType(EntityType.WOLF, box, EntityPredicates.canBePushedBy(this));
-		if (!wolves.isEmpty() && !this.world.isClient()) {
+		PlayerEntity player = this.world.getClosestPlayer(this, 10);
+		if (!wolves.isEmpty() && !this.world.isClient() && player != null && !player.getUuid().equals(this.getOwnerUuid())) {
 			// Wolves are in the immediate area
-			for (int i = 0; i < wolves.size(); i++) {
-				WolfEntity wolf = wolves.get(i);
-				PlayerEntity player = this.world.getClosestPlayer(this, 10);
-				if (player != null && !player.isCreative()) {
+			for (WolfEntity wolf : wolves) {
+				if (!player.isCreative()) {
 					wolf.setTarget(player);
 				}
 			}
@@ -119,15 +120,51 @@ public class GoliathWolfEntity extends HostileEntity implements Monster, IAnimat
 	}
 
 	@Override
+	public boolean isAttacking () {
+		if (this.isTame()) {
+			return false;
+		} else {
+			return super.isAttacking();
+		}
+	}
+
+	@Override
+	public boolean tryAttack (Entity target) {
+		if (target.getUuid().equals(this.getOwnerUuid())) {
+			// This is our owner, do not attack.
+			// Attack hostile entities in the area
+			Box box = this.getBoundingBox().expand(5, 3, 5);
+			List<HostileEntity> hostiles = this.world.getEntitiesByClass(HostileEntity.class, box, EntityPredicates.canBePushedBy(this));
+			if (!hostiles.isEmpty()) {
+				for (HostileEntity hostile : hostiles) {
+					System.out.println(hostile.getName());
+					this.getNavigation().startMovingTo(hostile, 2.0f);
+					this.getLookControl().lookAt(hostile, 30.0F, 30.0F);
+					this.setTarget(hostile);
+				}
+			}
+
+			return false;
+		} else {
+			return super.tryAttack(target);
+		}
+	}
+
+	@Override
 	public boolean canBeSaddled () {
-		return this.getHealth() <= 10;
+		PlayerEntity player =  this.world.getClosestPlayer(this, 3);
+		if (player != null && player.getUuid().equals(this.getOwnerUuid())) {
+			return true;
+		} else {
+			return this.getHealth() <= 10;
+		}
 	}
 
 	@Override
 	public void saddle (@Nullable SoundCategory sound) {
 		this.saddledComponent.setSaddled(true);
 		if (sound != null) {
-			this.world.playSoundFromEntity(null, this, SoundEvents.ENTITY_PIG_SADDLE, sound, 0.5F, 1.0F);
+			this.world.playSoundFromEntity(null, this, SoundEvents.ENTITY_HORSE_SADDLE, sound, 0.5F, 1.0F);
 		}
 	}
 
@@ -139,94 +176,28 @@ public class GoliathWolfEntity extends HostileEntity implements Monster, IAnimat
 	@Override
 	public ActionResult interactMob(PlayerEntity player, Hand hand) {
 		//boolean bl = this.isBreedingItem(player.getStackInHand(hand));
+		ItemStack itemStack = player.getStackInHand(hand);
+		ActionResult actionResult = itemStack.useOnEntity(player, this, hand);
+		if (actionResult.isAccepted()) {
+			return actionResult;
+		}
+
 		if (this.isSaddled() && !this.hasPassengers() && !player.shouldCancelInteraction()) {
 			if (!this.world.isClient) {
 				player.yaw = this.yaw;
 				player.pitch = this.pitch;
-				player.startRiding(this);
-			}
-
-			return ActionResult.success(this.world.isClient);
-		} else {
-			ActionResult actionResult = super.interactMob(player, hand);
-			if (!actionResult.isAccepted()) {
-				ItemStack itemStack = player.getStackInHand(hand);
-				return itemStack.getItem() == Items.SADDLE ? itemStack.useOnEntity(player, this, hand) : ActionResult.PASS;
-			} else {
-				return actionResult;
+				this.setTame(true);
+				this.setOwnerUuid(player.getUuid());
+				System.out.println("Tame: " + this.isTame() + " UUID: " + this.getOwnerUuid());
+				this.putPlayerOnBack(player);
 			}
 		}
+		return ActionResult.success(this.world.isClient);
 	}
 
 	@Override
-	public void travel(Vec3d movementInput) {
-		if (this.isAlive()) {
-			if (this.hasPassengers() && this.canBeControlledByRider() && this.isSaddled()) {
-				LivingEntity livingEntity = (LivingEntity) this.getPrimaryPassenger();
-				if (livingEntity != null) {
-					System.out.println("It's working");
-
-					this.yaw = livingEntity.yaw;
-					this.prevYaw = this.yaw;
-					this.pitch = livingEntity.pitch * 0.5F;
-					this.setRotation(this.yaw, this.pitch);
-					this.bodyYaw = this.yaw;
-					this.headYaw = this.bodyYaw;
-					float sideWaysSpeed = livingEntity.sidewaysSpeed * 0.5F;
-					float forwardSpeed = livingEntity.forwardSpeed;
-					if (forwardSpeed <= 0.0F) {
-						forwardSpeed *= 0.25F;
-					}
-
-					if (this.onGround && this.jumpStrength == 0.0F && !this.jumping) {
-						sideWaysSpeed = 0.0F;
-						forwardSpeed = 0.0F;
-					}
-
-					if (this.jumpStrength > 0.0F && this.isDescending() && this.onGround) {
-						double d = this.getJumpStrength() * (double) this.jumpStrength * (double) this.getJumpVelocityMultiplier();
-						double h;
-						if (this.hasStatusEffect(StatusEffects.JUMP_BOOST)) {
-							h = d + (double) ((float) (this.getStatusEffect(StatusEffects.JUMP_BOOST).getAmplifier() + 1) * 0.1F);
-						} else {
-							h = d;
-						}
-
-						Vec3d velocity = this.getVelocity();
-						this.setVelocity(velocity.x, h, velocity.z);
-						this.velocityDirty = true;
-						if (forwardSpeed > 0.0F) {
-							float i = MathHelper.sin(this.yaw * 0.017453292F);
-							float j = MathHelper.cos(this.yaw * 0.017453292F);
-							this.setVelocity(this.getVelocity().add(-0.4F * i * this.jumpStrength, 0.0D, 0.4F * j * this.jumpStrength));
-						}
-
-						this.jumpStrength = 0.0F;
-					}
-
-					this.flyingSpeed = this.getMovementSpeed() * 0.1F;
-					if (this.isLogicalSideForUpdatingMovement()) {
-						this.setMovementSpeed((float) this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
-						super.travel(new Vec3d(sideWaysSpeed, movementInput.y, forwardSpeed));
-					} else if (livingEntity instanceof PlayerEntity) {
-						this.setVelocity(Vec3d.ZERO);
-					}
-
-					if (this.onGround) {
-						this.jumpStrength = 0.0F;
-					}
-
-					this.method_29242(this, false);
-				}
-			} else {
-				this.flyingSpeed = 0.02F;
-				super.travel(movementInput);
-			}
-		}
-	}
-
 	public double getJumpStrength() {
-		return this.getAttributeValue(EntityAttributes.HORSE_JUMP_STRENGTH);
+		return this.jumpStrength;
 	}
 
 	@Override
@@ -234,21 +205,56 @@ public class GoliathWolfEntity extends HostileEntity implements Monster, IAnimat
 		return true;
 	}
 
-	@Override
-	public void writeCustomDataToTag(CompoundTag tag) {
-		super.writeCustomDataToTag(tag);
-		this.saddledComponent.toTag(tag);
-	}
-
-	@Override
-	public void readCustomDataFromTag(CompoundTag tag) {
-		super.readCustomDataFromTag(tag);
-		this.saddledComponent.fromTag(tag);
-	}
-
 	@Nullable
 	@Override
 	public Entity getPrimaryPassenger () {
 		return this.getPassengerList().isEmpty() ? null : this.getPassengerList().get(0);
+	}
+
+	@Override
+	public void writeCustomDataToTag(CompoundTag tag) {
+		tag.putBoolean("EatingHaystack", this.isEatingGrass());
+		tag.putBoolean("Bred", this.isBred());
+		tag.putInt("Temper", this.getTemper());
+		tag.putBoolean("Tame", this.isTame());
+		if (this.getOwnerUuid() != null) {
+			tag.putUuid("Owner", this.getOwnerUuid());
+		}
+
+		if (!this.items.getStack(0).isEmpty()) {
+			tag.put("SaddleItem", this.items.getStack(0).toTag(new CompoundTag()));
+		} else if (this.isSaddled()) {
+			tag.put("SaddleItem", new ItemStack(Items.SADDLE).toTag(new CompoundTag()));
+		}
+		System.out.println("Saving " + tag.toString());
+	}
+
+	@Override
+	public void readCustomDataFromTag(CompoundTag tag) {
+		this.setEatingGrass(tag.getBoolean("EatingHaystack"));
+		this.setBred(tag.getBoolean("Bred"));
+		this.setTemper(tag.getInt("Temper"));
+		this.setTame(tag.getBoolean("Tame"));
+		UUID uUID2;
+		if (tag.containsUuid("Owner")) {
+			uUID2 = tag.getUuid("Owner");
+		} else {
+			String string = tag.getString("Owner");
+			uUID2 = ServerConfigHandler.getPlayerUuidByName(this.getServer(), string);
+		}
+
+		if (uUID2 != null) {
+			this.setOwnerUuid(uUID2);
+		}
+
+		if (tag.contains("SaddleItem", 10)) {
+			ItemStack itemStack = ItemStack.fromTag(tag.getCompound("SaddleItem"));
+			if (itemStack.getItem() == Items.SADDLE) {
+				this.items.setStack(0, itemStack);
+				System.out.println("Set saddle!");
+			}
+		}
+		System.out.println("Loading " + tag.toString());
+		this.updateSaddle();
 	}
 }
