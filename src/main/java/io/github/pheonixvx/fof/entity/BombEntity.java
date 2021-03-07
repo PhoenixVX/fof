@@ -13,17 +13,14 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 
+@SuppressWarnings("EntityConstructor")
 public class BombEntity extends ThrownItemEntity {
-	public BombEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
+	public BombEntity (EntityType<? extends ThrownItemEntity> entityType, World world) {
 		super(entityType, world);
 	}
 
-	public BombEntity(World world, LivingEntity owner) {
+	public BombEntity (World world, LivingEntity owner) {
 		super(RegistryEntity.BOMB_ENTITY_TYPE, owner, world);
-	}
-
-	public BombEntity(World world, double x, double y, double z) {
-		super(RegistryEntity.BOMB_ENTITY_TYPE, x, y, z, world);
 	}
 
 	@Override
@@ -32,7 +29,7 @@ public class BombEntity extends ThrownItemEntity {
 	}
 
 	@Override
-	public Packet createSpawnPacket() {
+	public Packet<?> createSpawnPacket () {
 		return EntitySpawnPacket.create(this, FOFClient.PACKET_ID_BOMB);
 	}
 
@@ -48,7 +45,7 @@ public class BombEntity extends ThrownItemEntity {
 				position.getX(),
 				position.getY(),
 				position.getZ(),
-				2.0f,
+				0.1f,
 				Explosion.DestructionType.DESTROY
 			);
 		}

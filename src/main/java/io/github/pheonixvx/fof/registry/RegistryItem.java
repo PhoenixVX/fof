@@ -2,6 +2,7 @@ package io.github.pheonixvx.fof.registry;
 
 import io.github.pheonixvx.fof.items.BombItem;
 import io.github.pheonixvx.fof.items.BoomerangItem;
+import io.github.pheonixvx.fof.items.KatanaItem;
 import io.github.pheonixvx.fof.items.materials.CutlassToolMaterial;
 import io.github.pheonixvx.fof.items.materials.KatanaToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -62,7 +63,7 @@ public class RegistryItem {
 			.maxCount(1)
 	);
 
-	public static final Item FOF_KATANA = new SwordItem(
+	public static final Item FOF_KATANA = new KatanaItem(
 		new KatanaToolMaterial(1562, 0F, 0F, 0, 0, Ingredient.ofItems(Items.IRON_INGOT)),
 		5,
 		-2F,
@@ -73,7 +74,7 @@ public class RegistryItem {
 	);
 
 	// Initialize Item Registry.
-	public static void initializeItems() {
+	public static void initializeItems () {
 		Registry.register(
 			Registry.ITEM,
 			new Identifier(RegistryHandler.MOD_ID, "fof_boomerang"),
@@ -120,19 +121,19 @@ public class RegistryItem {
 			Registry.ITEM,
 			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_abomination_skeleton"),
 			new SpawnEggItem(RegistryEntity.ABOMINATION_SKELETON_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16)
-		));
+			));
 
 		Registry.register(
 			Registry.ITEM,
 			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_goliath_wolf"),
 			new SpawnEggItem(RegistryEntity.GOLIATH_WOLF_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16)
-		));
+			));
 
 		Registry.register(
 			Registry.ITEM,
 			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_dweller_bug"),
 			new SpawnEggItem(RegistryEntity.DWELLER_BUG_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16)
-		));
+			));
 
 
 		// Block Items

@@ -15,6 +15,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+@SuppressWarnings("EntityConstructor")
 public class DwellerBugEntity extends HostileEntity implements Monster, IAnimatable {
 
 	private final AnimationFactory animationFactory = new AnimationFactory(this);
@@ -25,15 +26,15 @@ public class DwellerBugEntity extends HostileEntity implements Monster, IAnimata
 	}
 
 	@Override
-	protected void initGoals() {
+	protected void initGoals () {
 		// Entity will walk around.
-		this.goalSelector.add(7, new WanderAroundFarGoal(this, 0.25D, 0.0F));
+		this.goalSelector.add(7, new WanderAroundFarGoal(this, 0.175D, 0.0F));
 		// Entity will look at Player.
 		this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 12.0F));
 		// Entity will look around
 		this.goalSelector.add(5, new LookAroundGoal(this));
 		// Entity will melee-attack
-		this.goalSelector.add(4, new EntityMeleeAttack(this, 1.0D, false, 8.0D));
+		this.goalSelector.add(4, new EntityMeleeAttack(this, 0.250D, false, 8.0D));
 		// Entity will follow player
 		this.targetSelector.add(5, new FollowTargetGoal(this, PlayerEntity.class, true));
 		// Entity will attempt revenge
@@ -41,7 +42,7 @@ public class DwellerBugEntity extends HostileEntity implements Monster, IAnimata
 	}
 
 	// Animation stuff
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	private <E extends IAnimatable> PlayState predicate (AnimationEvent<E> event) {
 		if (!(lastLimbDistance > -0.15F && lastLimbDistance < 0.15F) && !this.isAttacking()) {
 			event.getController().setAnimation(
 				new AnimationBuilder().addAnimation("walking", true)
@@ -71,7 +72,7 @@ public class DwellerBugEntity extends HostileEntity implements Monster, IAnimata
 	}
 
 	@Override
-	public AnimationFactory getFactory() {
+	public AnimationFactory getFactory () {
 		return this.animationFactory;
 	}
 }

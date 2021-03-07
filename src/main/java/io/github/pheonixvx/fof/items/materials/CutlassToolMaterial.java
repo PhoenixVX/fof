@@ -11,7 +11,7 @@ public class CutlassToolMaterial implements ToolMaterial {
 	final int enchantingLevel;
 	final Ingredient repairIngredient;
 
-	public CutlassToolMaterial(int durability, float miningSpeedMultiplier, float attackDamage, int enchantingLevel, Ingredient repairIngredient) {
+	public CutlassToolMaterial (int durability, float miningSpeedMultiplier, float attackDamage, int enchantingLevel, Ingredient repairIngredient) {
 		this.durability = durability;
 		this.miningSpeedMultiplier = miningSpeedMultiplier;
 		this.attackDamage = attackDamage;

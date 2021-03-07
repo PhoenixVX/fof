@@ -1,50 +1,193 @@
 {
-  "texture_size": [32, 32],
+  "texture_size": [
+    32,
+    32
+  ],
   "textures": {
     "all": "#missing"
   },
   "elements": [
     {
       "name": "bomb",
-      "from": [4.5, -0.5, 4.5],
-      "to": [11.5, 6.5, 11.5],
-      "rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+      "from": [
+        4.5,
+        -0.5,
+        4.5
+      ],
+      "to": [
+        11.5,
+        6.5,
+        11.5
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          8,
+          0,
+          8
+        ]
+      },
       "color": 2,
       "faces": {
-        "north": {"uv": [3.5, 3.5, 7, 7], "texture": "#missing"},
-        "east": {"uv": [0, 3.5, 3.5, 7], "texture": "#missing"},
-        "south": {"uv": [10.5, 3.5, 14, 7], "texture": "#missing"},
-        "west": {"uv": [7, 3.5, 10.5, 7], "texture": "#missing"},
-        "up": {"uv": [7, 3.5, 3.5, 0], "texture": "#missing"},
-        "down": {"uv": [10.5, 0, 7, 3.5], "texture": "#missing"}
+        "north": {
+          "uv": [
+            3.5,
+            3.5,
+            7,
+            7
+          ],
+          "texture": "#missing"
+        },
+        "east": {
+          "uv": [
+            0,
+            3.5,
+            3.5,
+            7
+          ],
+          "texture": "#missing"
+        },
+        "south": {
+          "uv": [
+            10.5,
+            3.5,
+            14,
+            7
+          ],
+          "texture": "#missing"
+        },
+        "west": {
+          "uv": [
+            7,
+            3.5,
+            10.5,
+            7
+          ],
+          "texture": "#missing"
+        },
+        "up": {
+          "uv": [
+            7,
+            3.5,
+            3.5,
+            0
+          ],
+          "texture": "#missing"
+        },
+        "down": {
+          "uv": [
+            10.5,
+            0,
+            7,
+            3.5
+          ],
+          "texture": "#missing"
+        }
       }
     },
     {
       "name": "fuse",
-      "from": [7.5, 6, 8],
-      "to": [8.5, 10, 8],
-      "rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+      "from": [
+        7.5,
+        6,
+        8
+      ],
+      "to": [
+        8.5,
+        10,
+        8
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          8,
+          0,
+          8
+        ]
+      },
       "color": 7,
       "faces": {
-        "north": {"uv": [0, 0, 0.5, 2], "texture": "#missing"},
-        "east": {"uv": [0, 0, 0, 2], "texture": "#missing"},
-        "south": {"uv": [0.5, 0, 1, 2], "texture": "#missing"},
-        "west": {"uv": [0.5, 0, 0.5, 2], "texture": "#missing"},
-        "up": {"uv": [0.5, 0, 0, 0], "texture": "#missing"},
-        "down": {"uv": [1, 0, 0.5, 0], "texture": "#missing"}
+        "north": {
+          "uv": [
+            0,
+            0,
+            0.5,
+            2
+          ],
+          "texture": "#missing"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            2
+          ],
+          "texture": "#missing"
+        },
+        "south": {
+          "uv": [
+            0.5,
+            0,
+            1,
+            2
+          ],
+          "texture": "#missing"
+        },
+        "west": {
+          "uv": [
+            0.5,
+            0,
+            0.5,
+            2
+          ],
+          "texture": "#missing"
+        },
+        "up": {
+          "uv": [
+            0.5,
+            0,
+            0,
+            0
+          ],
+          "texture": "#missing"
+        },
+        "down": {
+          "uv": [
+            1,
+            0,
+            0.5,
+            0
+          ],
+          "texture": "#missing"
+        }
       }
     }
   ],
   "groups": [
     {
       "name": "bomb",
-      "origin": [0, 6.5, 0],
-      "children": [0]
+      "origin": [
+        0,
+        6.5,
+        0
+      ],
+      "children": [
+        0
+      ]
     },
     {
       "name": "fuse",
-      "origin": [0, 6, 0],
-      "children": [1]
+      "origin": [
+        0,
+        6,
+        0
+      ],
+      "children": [
+        1
+      ]
     }
   ]
 }

@@ -16,6 +16,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 
+@SuppressWarnings("deprecation")
 public class RegistryEntity {
 
 	public static final EntityType<BoomerangEntity> BOOMERANG_ENTITY_TYPE = Registry.register(
@@ -63,24 +64,41 @@ public class RegistryEntity {
 			.build()
 	);
 
-	public static void initializeEntities() {
+	public static final EntityType<EldritchGownEntity> ELDRITCH_GOWN_ENTITY_TYPE = Registry.register(
+		Registry.ENTITY_TYPE,
+		new Identifier(RegistryHandler.MOD_ID, "fof_eldritch_gown"),
+		FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EldritchGownEntity::new)
+			.dimensions(EntityDimensions.fixed(1.40F, 2.75F))
+			.build()
+	);
+
+	public static void initializeEntities () {
 		FabricDefaultAttributeRegistry.register(
 			DWELLER_BUG_ENTITY_TYPE,
 			DwellerBugEntity.createMobAttributes()
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 7)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.170F)
 		);
 
 		FabricDefaultAttributeRegistry.register(
 			ABOMINATION_SKELETON_ENTITY_TYPE,
 			AbominationSkeletonEntity.createMobAttributes()
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.175F)
 		);
 
 		FabricDefaultAttributeRegistry.register(
 			GOLIATH_WOLF_ENTITY_TYPE,
 			GoliathWolfEntity.createMobAttributes()
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.10)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.175F)
+		);
+
+		FabricDefaultAttributeRegistry.register(
+			ELDRITCH_GOWN_ENTITY_TYPE,
+			EldritchGownEntity.createMobAttributes()
+				.add(EntityAttributes.GENERIC_MAX_HEALTH, 30)
+				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3)
 		);
 
 		// Spawning Restrictions
@@ -105,13 +123,20 @@ public class RegistryEntity {
 			MobEntity::canMobSpawn
 		);
 
+		SpawnRestrictionAccessor.callRegister(
+			ELDRITCH_GOWN_ENTITY_TYPE,
+			SpawnRestriction.Location.ON_GROUND,
+			Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+			MobEntity::canMobSpawn
+		);
+
 		BiomeModifications.addSpawn(
 			biomeSelectionContext -> true,
 			SpawnGroup.MONSTER,
 			DWELLER_BUG_ENTITY_TYPE,
 			10,
-			3,
-			7
+			2,
+			5
 		);
 
 		BiomeModifications.addSpawn(
@@ -129,6 +154,15 @@ public class RegistryEntity {
 			GOLIATH_WOLF_ENTITY_TYPE,
 			2,
 			2,
+			4
+		);
+
+		BiomeModifications.addSpawn(
+			biomeSelectionContext -> true,
+			SpawnGroup.MONSTER,
+			ELDRITCH_GOWN_ENTITY_TYPE,
+			1,
+			3,
 			4
 		);
 	}

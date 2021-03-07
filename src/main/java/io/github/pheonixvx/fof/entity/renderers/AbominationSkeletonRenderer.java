@@ -15,7 +15,7 @@ public class AbominationSkeletonRenderer extends GeoEntityRenderer<AbominationSk
 
 	Identifier texture = new Identifier(RegistryHandler.MOD_ID, "textures/entity/fof_abomination_skeleton.png");
 
-	public AbominationSkeletonRenderer(EntityRenderDispatcher entityRenderDispatcher) {
+	public AbominationSkeletonRenderer (EntityRenderDispatcher entityRenderDispatcher) {
 		super(entityRenderDispatcher, new AbominationSkeletonModel());
 	}
 

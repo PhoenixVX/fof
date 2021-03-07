@@ -3,6 +3,7 @@ package io.github.pheonixvx.fof.client;
 import io.github.pheonixvx.fof.entity.EntitySpawnPacket;
 import io.github.pheonixvx.fof.entity.renderers.AbominationSkeletonRenderer;
 import io.github.pheonixvx.fof.entity.renderers.DwellerBugRenderer;
+import io.github.pheonixvx.fof.entity.renderers.EldritchGownRenderer;
 import io.github.pheonixvx.fof.entity.renderers.GoliathWolfRenderer;
 import io.github.pheonixvx.fof.registry.RegistryBlock;
 import io.github.pheonixvx.fof.registry.RegistryEntity;
@@ -38,27 +39,31 @@ public class FOFClient implements ClientModInitializer {
 		// Entities
 		EntityRendererRegistry.INSTANCE.register(
 			RegistryEntity.BOOMERANG_ENTITY_TYPE, (dispatcher, context) ->
-				new FlyingItemEntityRenderer(dispatcher, context.getItemRenderer()));
+				                                      new FlyingItemEntityRenderer<>(dispatcher, context.getItemRenderer()));
 		EntityRendererRegistry.INSTANCE.register(
 			RegistryEntity.BOMB_ENTITY_TYPE, (dispatcher, context) ->
-				new FlyingItemEntityRenderer(dispatcher, context.getItemRenderer()));
-
+				                                 new FlyingItemEntityRenderer<>(dispatcher, context.getItemRenderer()));
 		EntityRendererRegistry.INSTANCE.register(
 			RegistryEntity.DWELLER_BUG_ENTITY_TYPE,
-				(dispatcher, context) -> new DwellerBugRenderer(dispatcher)
+			(dispatcher, context) -> new DwellerBugRenderer(dispatcher)
 		);
 		EntityRendererRegistry.INSTANCE.register(
 			RegistryEntity.ABOMINATION_SKELETON_ENTITY_TYPE,
-				(dispatcher, context) -> new AbominationSkeletonRenderer(dispatcher)
+			(dispatcher, context) -> new AbominationSkeletonRenderer(dispatcher)
 		);
 		EntityRendererRegistry.INSTANCE.register(
 			RegistryEntity.GOLIATH_WOLF_ENTITY_TYPE,
-				(dispatcher, context) -> new GoliathWolfRenderer(dispatcher)
+			(dispatcher, context) -> new GoliathWolfRenderer(dispatcher)
+		);
+		EntityRendererRegistry.INSTANCE.register(
+			RegistryEntity.ELDRITCH_GOWN_ENTITY_TYPE,
+			(dispatcher, context) -> new EldritchGownRenderer(dispatcher)
 		);
 		receiveEntityPacket();
 	}
 
-	public void receiveEntityPacket() {
+	@SuppressWarnings("deprecation")
+	public void receiveEntityPacket () {
 		ClientSidePacketRegistry.INSTANCE.register(PACKET_ID_BOOMERANG, (ctx, byteBuf) -> {
 			EntityType<?> et = Registry.ENTITY_TYPE.get(byteBuf.readVarInt());
 			UUID uuid = byteBuf.readUuid();

@@ -2,10 +2,15 @@ package io.github.pheonixvx.fof.entity;
 
 import io.github.pheonixvx.fof.entity.goals.EntityMeleeAttack;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -15,6 +20,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+@SuppressWarnings("EntityConstructor")
 public class AbominationSkeletonEntity extends HostileEntity implements Monster, IAnimatable {
 	private final AnimationFactory animationFactory = new AnimationFactory(this);
 	private boolean lowHealth;
@@ -26,7 +32,7 @@ public class AbominationSkeletonEntity extends HostileEntity implements Monster,
 	}
 
 	@Override
-	protected void initGoals() {
+	protected void initGoals () {
 		// Entity will walk around.
 		this.goalSelector.add(7, new WanderAroundFarGoal(this, 0.25D, 0.0F));
 		// Entity will look at Player.
@@ -39,24 +45,28 @@ public class AbominationSkeletonEntity extends HostileEntity implements Monster,
 		this.targetSelector.add(5, new FollowTargetGoal<>(this, PlayerEntity.class, true));
 		// Entity will attempt revenge
 		this.targetSelector.add(3, new RevengeGoal(this));
+
+		// Flee and avoid sunlight
+		this.goalSelector.add(2, new AvoidSunlightGoal(this));
+		this.goalSelector.add(3, new EscapeSunlightGoal(this, 1.0D));
 	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	private <E extends IAnimatable> PlayState predicate (AnimationEvent<E> event) {
 		if (!(lastLimbDistance > -0.15F && lastLimbDistance < 0.15F) && !this.isAttacking()) {
 			// Assume they are walking
 			event.getController().setAnimation(
 				new AnimationBuilder().addAnimation("walking", true)
 			);
 			return PlayState.CONTINUE;
-		}
-		if (lowHealth) {
+		} else if (lowHealth) {
 			event.getController().setAnimation(
-				new AnimationBuilder().addAnimation("head_bounce", true)
+				new AnimationBuilder().addAnimation("head_bounce", false)
 			);
 			return PlayState.CONTINUE;
+		} else {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", true));
+			return PlayState.CONTINUE;
 		}
-		event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", true));
-		return PlayState.CONTINUE;
 	}
 
 	@Override
@@ -74,16 +84,56 @@ public class AbominationSkeletonEntity extends HostileEntity implements Monster,
 	@Override
 	public void tick () {
 		super.tick();
-		if (this.getHealth() == 5) {
-			this.lowHealth = true;
-		} else {
-			this.lowHealth = false;
-		}
+		this.lowHealth = this.getHealth() <= 5;
 		ticks++;
 		// Heal automatically
 		if (lowHealth && this.ticks == 3000) {
 			ticks = 0;
 			this.setHealth(this.getHealth() + 5);
 		}
+	}
+
+	/*
+	 * Set skeleton on fire
+	 */
+	@Override
+	public void tickMovement() {
+		boolean isAffectedByDaylight = this.isAffectedByDaylight();
+		if (isAffectedByDaylight) {
+			// Check if the ENtity has a helmet of some kind to avoid burning.
+			ItemStack itemStack = this.getEquippedStack(EquipmentSlot.HEAD);
+			if (!itemStack.isEmpty()) {
+				if (itemStack.isDamageable()) {
+					itemStack.setDamage(itemStack.getDamage() + this.random.nextInt(2));
+					if (itemStack.getDamage() >= itemStack.getMaxDamage()) {
+						this.sendEquipmentBreakStatus(EquipmentSlot.HEAD);
+						this.equipStack(EquipmentSlot.HEAD, ItemStack.EMPTY);
+					}
+				}
+
+				isAffectedByDaylight = false;
+			}
+
+			// Burn the Entity if it doesn't have a helmet.
+			if (isAffectedByDaylight) {
+				this.setOnFireFor(8);
+			}
+		}
+		super.tickMovement();
+	}
+
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return SoundEvents.ENTITY_SKELETON_AMBIENT;
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource source) {
+		return SoundEvents.ENTITY_SKELETON_HURT;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundEvents.ENTITY_SKELETON_DEATH;
 	}
 }

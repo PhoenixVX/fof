@@ -17,7 +17,7 @@ public class BoomerangItem extends Item {
 	}
 
 	@Override
-	public TypedActionResult<ItemStack> use(World world, PlayerEntity playerEntity, Hand hand) {
+	public TypedActionResult<ItemStack> use (World world, PlayerEntity playerEntity, Hand hand) {
 		ItemStack itemStack = playerEntity.getStackInHand(hand);
 		// Cooldown on item
 		playerEntity.getItemCooldownManager().set(this, 10);
@@ -32,7 +32,8 @@ public class BoomerangItem extends Item {
 			playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
 			if (!playerEntity.abilities.creativeMode) {
 				// Damage the boomerang after throwing
-				itemStack.damage(1, (ServerPlayerEntity) playerEntity, (entity) -> {});
+				itemStack.damage(1, (ServerPlayerEntity) playerEntity, (entity) -> {
+				});
 			}
 		}
 

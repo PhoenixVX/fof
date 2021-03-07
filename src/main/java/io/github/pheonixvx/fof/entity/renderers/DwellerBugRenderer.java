@@ -9,7 +9,7 @@ import software.bernie.geckolib3.renderer.geo.GeoEntityRenderer;
 
 public class DwellerBugRenderer extends GeoEntityRenderer<DwellerBugEntity> {
 
-	public DwellerBugRenderer(EntityRenderDispatcher entityRenderDispatcher) {
+	public DwellerBugRenderer (EntityRenderDispatcher entityRenderDispatcher) {
 		super(entityRenderDispatcher, new DwellerBugModel());
 	}
 

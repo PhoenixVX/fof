@@ -23,7 +23,7 @@ public class RegistryBlock {
 		FabricBlockSettings.of(Material.PLANT).breakByHand(true).nonOpaque().noCollision()
 	);
 
-	public static void initializeBlocks() {
+	public static void initializeBlocks () {
 		Registry.register(
 			Registry.BLOCK,
 			new Identifier(RegistryHandler.MOD_ID, "fof_zuubee_mound"),

@@ -1,7 +1,6 @@
 package io.github.pheonixvx.fof.entity;
 
 import io.github.pheonixvx.fof.client.FOFClient;
-import io.github.pheonixvx.fof.entity.EntitySpawnPacket;
 import io.github.pheonixvx.fof.registry.RegistryEntity;
 import io.github.pheonixvx.fof.registry.RegistryItem;
 import net.minecraft.entity.Entity;
@@ -19,17 +18,18 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
+@SuppressWarnings("EntityConstructor")
 public class BoomerangEntity extends ThrownItemEntity {
 
-	public BoomerangEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
+	public BoomerangEntity (EntityType<? extends ThrownItemEntity> entityType, World world) {
 		super(entityType, world);
 	}
 
-	public BoomerangEntity(World world, LivingEntity owner) {
+	public BoomerangEntity (World world, LivingEntity owner) {
 		super(RegistryEntity.BOOMERANG_ENTITY_TYPE, owner, world); // null will be changed later
 	}
 
-	public BoomerangEntity(World world, double x, double y, double z) {
+	public BoomerangEntity (World world, double x, double y, double z) {
 		super(RegistryEntity.BOOMERANG_ENTITY_TYPE, x, y, z, world); // null will be changed later
 	}
 
@@ -39,13 +39,13 @@ public class BoomerangEntity extends ThrownItemEntity {
 	}
 
 	@Override
-	public Packet createSpawnPacket() {
+	public Packet createSpawnPacket () {
 		return EntitySpawnPacket.create(this, FOFClient.PACKET_ID_BOOMERANG);
 	}
 
 	// Called when the Boomerang hits an Entity
 	@Override
-	protected void onEntityHit(EntityHitResult entityHitResult) {
+	protected void onEntityHit (EntityHitResult entityHitResult) {
 		super.onEntityHit(entityHitResult);
 
 		Entity entity = entityHitResult.getEntity();
@@ -56,9 +56,9 @@ public class BoomerangEntity extends ThrownItemEntity {
 			livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 40));
 			Random random = new Random();
 			if (random.nextFloat() < 0.95f) {
-				livingEntity.damage(DamageSource.GENERIC, 9);
-			} else {
 				livingEntity.damage(DamageSource.GENERIC, 7);
+			} else {
+				livingEntity.damage(DamageSource.GENERIC, 5);
 			}
 		}
 	}

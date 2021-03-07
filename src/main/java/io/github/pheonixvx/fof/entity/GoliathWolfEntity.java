@@ -31,6 +31,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import java.util.List;
 import java.util.UUID;
 
+@SuppressWarnings("EntityConstructor")
 public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnimatable, Saddleable {
 	private final AnimationFactory animationFactory = new AnimationFactory(this);
 	protected float jumpStrength = 0.5F;
@@ -41,22 +42,22 @@ public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnim
 	}
 
 	@Override
-	protected void initGoals() {
+	protected void initGoals () {
 		// Entity will walk around.
-		this.goalSelector.add(7, new WanderAroundFarGoal(this, 0.25D, 0.0F));
+		this.goalSelector.add(7, new WanderAroundFarGoal(this, 0.50D, 0.0F));
 		// Entity will look at Player.
 		this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 12.0F));
 		// Entity will look around
 		this.goalSelector.add(5, new LookAroundGoal(this));
 		// Entity will melee-attack
-		this.goalSelector.add(4, new EntityMeleeAttack(this, 0.75D, false, 8.0D));
+		this.goalSelector.add(4, new EntityMeleeAttack(this, 1.0D, false, 8.0D));
 		// Entity will follow player
-		this.targetSelector.add(5, new FollowTargetGoal(this, PlayerEntity.class, true));
+		this.targetSelector.add(5, new FollowTargetGoal<>(this, PlayerEntity.class, true));
 		// Entity will attempt revenge
 		this.targetSelector.add(3, new RevengeGoal(this));
 	}
 
-	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+	private <E extends IAnimatable> PlayState predicate (AnimationEvent<E> event) {
 		if (!(lastLimbDistance > -0.15F && lastLimbDistance < 0.15F) && !this.isAttacking()) {
 			event.getController().setAnimation(
 				new AnimationBuilder().addAnimation("walking", true)
@@ -77,7 +78,7 @@ public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnim
 
 	@Override
 	public void registerControllers (AnimationData animationData) {
-		animationData.addAnimationController(new AnimationController(this, "controller", 0, this::predicate));
+		animationData.addAnimationController(new AnimationController<>(this, "controller", 0, this::predicate));
 	}
 
 	@Override
@@ -125,7 +126,7 @@ public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnim
 
 	@Override
 	public boolean canBeSaddled () {
-		PlayerEntity player =  this.world.getClosestPlayer(this, 3);
+		PlayerEntity player = this.world.getClosestPlayer(this, 3);
 		if (player != null && player.getUuid().equals(this.getOwnerUuid())) {
 			return true;
 		} else {
@@ -134,7 +135,7 @@ public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnim
 	}
 
 	@Override
-	public ActionResult interactMob(PlayerEntity player, Hand hand) {
+	public ActionResult interactMob (PlayerEntity player, Hand hand) {
 		ItemStack itemStack = player.getStackInHand(hand);
 		ActionResult actionResult = itemStack.useOnEntity(player, this, hand);
 		if (actionResult.isAccepted()) {
@@ -154,7 +155,7 @@ public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnim
 	}
 
 	@Override
-	public double getJumpStrength() {
+	public double getJumpStrength () {
 		return this.jumpStrength;
 	}
 
@@ -170,7 +171,7 @@ public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnim
 	}
 
 	@Override
-	public void writeCustomDataToTag(CompoundTag tag) {
+	public void writeCustomDataToTag (CompoundTag tag) {
 		tag.putBoolean("EatingHaystack", this.isEatingGrass());
 		tag.putBoolean("Bred", this.isBred());
 		tag.putInt("Temper", this.getTemper());
@@ -187,7 +188,7 @@ public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnim
 	}
 
 	@Override
-	public void readCustomDataFromTag(CompoundTag tag) {
+	public void readCustomDataFromTag (CompoundTag tag) {
 		this.setEatingGrass(tag.getBoolean("EatingHaystack"));
 		this.setBred(tag.getBoolean("Bred"));
 		this.setTemper(tag.getInt("Temper"));
@@ -208,7 +209,6 @@ public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnim
 			ItemStack itemStack = ItemStack.fromTag(tag.getCompound("SaddleItem"));
 			if (itemStack.getItem() == Items.SADDLE) {
 				this.items.setStack(0, itemStack);
-				System.out.println("Set saddle!");
 			}
 		}
 		this.updateSaddle();
