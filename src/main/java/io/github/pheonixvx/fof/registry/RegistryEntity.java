@@ -56,6 +56,14 @@ public class RegistryEntity {
 			.build()
 	);
 
+	public static final EntityType<NetherAbominationSkeletonEntity> NETHER_ABOMINATION_SKELETON_ENTITY_TYPE = Registry.register(
+		Registry.ENTITY_TYPE,
+		new Identifier(RegistryHandler.MOD_ID, "fof_nether_abomination_skeleton"),
+		FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, NetherAbominationSkeletonEntity::new)
+			.dimensions(EntityDimensions.fixed(1.25f, 2.75f))
+			.build()
+	);
+
 	public static final EntityType<GoliathWolfEntity> GOLIATH_WOLF_ENTITY_TYPE = Registry.register(
 		Registry.ENTITY_TYPE,
 		new Identifier(RegistryHandler.MOD_ID, "fof_goliath_wolf"),
@@ -83,6 +91,13 @@ public class RegistryEntity {
 		FabricDefaultAttributeRegistry.register(
 			ABOMINATION_SKELETON_ENTITY_TYPE,
 			AbominationSkeletonEntity.createMobAttributes()
+				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.175F)
+		);
+
+		FabricDefaultAttributeRegistry.register(
+			NETHER_ABOMINATION_SKELETON_ENTITY_TYPE,
+			NetherAbominationSkeletonEntity.createMobAttributes()
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5)
 				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.175F)
 		);
@@ -117,6 +132,13 @@ public class RegistryEntity {
 		);
 
 		SpawnRestrictionAccessor.callRegister(
+			NETHER_ABOMINATION_SKELETON_ENTITY_TYPE,
+			SpawnRestriction.Location.ON_GROUND,
+			Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+			MobEntity::canMobSpawn
+		);
+
+		SpawnRestrictionAccessor.callRegister(
 			GOLIATH_WOLF_ENTITY_TYPE,
 			SpawnRestriction.Location.ON_GROUND,
 			Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
@@ -143,6 +165,15 @@ public class RegistryEntity {
 			biomeSelectionContext -> true,
 			SpawnGroup.MONSTER,
 			ABOMINATION_SKELETON_ENTITY_TYPE,
+			15,
+			4,
+			6
+		);
+
+		BiomeModifications.addSpawn(
+			biomeSelectionContext -> true,
+			SpawnGroup.MONSTER,
+			NETHER_ABOMINATION_SKELETON_ENTITY_TYPE,
 			15,
 			4,
 			6
