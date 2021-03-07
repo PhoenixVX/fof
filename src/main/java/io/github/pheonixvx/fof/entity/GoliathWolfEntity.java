@@ -50,7 +50,7 @@ public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnim
 		// Entity will look around
 		this.goalSelector.add(5, new LookAroundGoal(this));
 		// Entity will melee-attack
-		this.goalSelector.add(4, new EntityMeleeAttack(this, 1.0D, false, 8.0D));
+		this.goalSelector.add(4, new EntityMeleeAttack(this, 1.25D, false, 8.0D));
 		// Entity will follow player
 		this.targetSelector.add(5, new FollowTargetGoal<>(this, PlayerEntity.class, true));
 		// Entity will attempt revenge
@@ -212,5 +212,11 @@ public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnim
 			}
 		}
 		this.updateSaddle();
+	}
+
+	@Override
+	public void kill () {
+		super.kill();
+		this.heal(2.0F);
 	}
 }

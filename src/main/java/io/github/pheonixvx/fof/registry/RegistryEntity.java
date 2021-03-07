@@ -92,21 +92,22 @@ public class RegistryEntity {
 			ABOMINATION_SKELETON_ENTITY_TYPE,
 			AbominationSkeletonEntity.createMobAttributes()
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.175F)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.525F)
 		);
 
 		FabricDefaultAttributeRegistry.register(
 			NETHER_ABOMINATION_SKELETON_ENTITY_TYPE,
 			NetherAbominationSkeletonEntity.createMobAttributes()
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.175F)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.525F)
 		);
 
 		FabricDefaultAttributeRegistry.register(
 			GOLIATH_WOLF_ENTITY_TYPE,
 			GoliathWolfEntity.createMobAttributes()
-				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.175F)
+				.add(EntityAttributes.GENERIC_MAX_HEALTH, 50)
+				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35F)
 		);
 
 		FabricDefaultAttributeRegistry.register(

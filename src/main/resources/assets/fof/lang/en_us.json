@@ -15,5 +15,9 @@
   "block.fof.fof_loot_grass": "Loot Grass",
   "entity.fof.fof_dweller_bug": "Dweller Bug",
   "entity.fof.fof_abomination_skeleton": "Abomination Skeleton",
-  "entity.fof.fof_goliath_wolf": "Goliath Wolf"
+  "entity.fof.fof_goliath_wolf": "Goliath Wolf",
+  "entity.fof.fof_eldritch_gown": "Eldritch Gown",
+  "entity.fof.fof_nether_abomination_skeleton": "Nether Abomination Skeleton",
+  "entity.fof.boomerang_entity": "Boomerang",
+  "entity.fof.bomb_entity": "Bomb"
 }

@@ -34,7 +34,7 @@ public class AbstractAbominationSkeletonEntity extends HostileEntity implements 
 	@Override
 	protected void initGoals () {
 		// Entity will walk around.
-		this.goalSelector.add(7, new WanderAroundFarGoal(this, 0.25D, 0.0F));
+		this.goalSelector.add(7, new WanderAroundFarGoal(this, 0.5D, 0.0F));
 		// Entity will look at Player.
 		this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 12.0F));
 		// Entity will look around

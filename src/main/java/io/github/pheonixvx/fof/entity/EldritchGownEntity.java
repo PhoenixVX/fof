@@ -68,7 +68,8 @@ public class EldritchGownEntity extends HostileEntity implements Monster, IAnima
 				ItemStack stack = entity.getMainHandStack();
 				Map<Enchantment, Integer> enchants = EnchantmentHelper.get(stack);
 				if (!enchants.isEmpty() && !this.world.isClient) {
-					return super.damage(source, amount);
+					this.setHealth(this.getHealth() - amount);
+					return true;
 				}
 			}
 		}
@@ -82,7 +83,7 @@ public class EldritchGownEntity extends HostileEntity implements Monster, IAnima
 			ItemStack stack = entity.inventory.getArmorStack(2);
 
 			Map<Enchantment, Integer> enchants = EnchantmentHelper.get(stack);
-			if (enchants.containsKey(Enchantments.PROTECTION)) {
+			if (enchants.containsKey(Enchantments.PROTECTION) && !this.world.isClient) {
 				super.applyDamage(source, amount * 8);
 			} else if (!enchants.isEmpty() && !this.world.isClient) {
 				super.applyDamage(source, amount * 5); // 15 damage essentially.
