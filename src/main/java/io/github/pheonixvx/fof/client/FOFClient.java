@@ -35,6 +35,7 @@ public class FOFClient implements ClientModInitializer {
 	public void onInitializeClient () {
 		// Blocks
 		BlockRenderLayerMap.INSTANCE.putBlock(RegistryBlock.FOF_ZUUBEE_MOUND, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(RegistryBlock.FOF_LOOT_GRASS, RenderLayer.getCutout());
 
 		// Entities
 		EntityRendererRegistry.INSTANCE.register(
