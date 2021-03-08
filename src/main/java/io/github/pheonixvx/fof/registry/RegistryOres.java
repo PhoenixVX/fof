@@ -14,15 +14,15 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 public class RegistryOres {
 
 	private static ConfiguredFeature<?, ?> FOF_ZUUBEE_MOUND = Feature.ORE
-		   .configure(
-		   	    new OreFeatureConfig(
-		   	    	OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
-			        RegistryBlock.FOF_ZUUBEE_MOUND.getDefaultState(),
-			        8
-		        )
-		   )
-		   .rangeOf(16)
-		   .spreadHorizontally();
+		                                                          .configure(
+			                                                          new OreFeatureConfig(
+				                                                          OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
+				                                                          RegistryBlock.FOF_ZUUBEE_MOUND.getDefaultState(),
+				                                                          8
+			                                                          )
+		                                                          )
+		                                                          .rangeOf(16)
+		                                                          .spreadHorizontally();
 
 	@SuppressWarnings("deprecation")
 	public static void initializeOres () {

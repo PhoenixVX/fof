@@ -120,20 +120,32 @@ public class RegistryItem {
 		Registry.register(
 			Registry.ITEM,
 			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_abomination_skeleton"),
-			new SpawnEggItem(RegistryEntity.ABOMINATION_SKELETON_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16)
-			));
+			new SpawnEggItem(RegistryEntity.ABOMINATION_SKELETON_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16))
+		);
+
+		Registry.register(
+			Registry.ITEM,
+			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_nether_abomination_skeleton"),
+			new SpawnEggItem(RegistryEntity.NETHER_ABOMINATION_SKELETON_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16))
+		);
 
 		Registry.register(
 			Registry.ITEM,
 			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_goliath_wolf"),
-			new SpawnEggItem(RegistryEntity.GOLIATH_WOLF_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16)
-			));
+			new SpawnEggItem(RegistryEntity.GOLIATH_WOLF_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16))
+		);
 
 		Registry.register(
 			Registry.ITEM,
 			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_dweller_bug"),
-			new SpawnEggItem(RegistryEntity.DWELLER_BUG_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16)
-			));
+			new SpawnEggItem(RegistryEntity.DWELLER_BUG_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16))
+		);
+
+		Registry.register(
+			Registry.ITEM,
+			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_eldritch_gown"),
+			new SpawnEggItem(RegistryEntity.ELDRITCH_GOWN_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16))
+		);
 
 
 		// Block Items

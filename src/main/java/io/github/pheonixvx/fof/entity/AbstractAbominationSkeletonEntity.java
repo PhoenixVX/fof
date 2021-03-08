@@ -98,7 +98,7 @@ public class AbstractAbominationSkeletonEntity extends HostileEntity implements 
 	 * Set skeleton on fire
 	 */
 	@Override
-	public void tickMovement() {
+	public void tickMovement () {
 		boolean isAffectedByDaylight = this.isAffectedByDaylight();
 		if (isAffectedByDaylight) {
 			// Check if the ENtity has a helmet of some kind to avoid burning.
@@ -124,17 +124,17 @@ public class AbstractAbominationSkeletonEntity extends HostileEntity implements 
 	}
 
 	@Override
-	protected SoundEvent getAmbientSound() {
+	protected SoundEvent getAmbientSound () {
 		return SoundEvents.ENTITY_SKELETON_AMBIENT;
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
+	protected SoundEvent getHurtSound (DamageSource source) {
 		return SoundEvents.ENTITY_SKELETON_HURT;
 	}
 
 	@Override
-	protected SoundEvent getDeathSound() {
+	protected SoundEvent getDeathSound () {
 		return SoundEvents.ENTITY_SKELETON_DEATH;
 	}
 }
