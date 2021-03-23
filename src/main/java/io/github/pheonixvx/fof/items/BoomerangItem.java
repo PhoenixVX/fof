@@ -1,6 +1,6 @@
 package io.github.pheonixvx.fof.items;
 
-import io.github.pheonixvx.fof.entity.BoomerangEntity;
+import io.github.pheonixvx.fof.entity.projectiles.BoomerangEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

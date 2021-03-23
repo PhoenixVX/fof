@@ -26,6 +26,9 @@ import software.bernie.geckolib3.util.AnimationUtils;
 import java.awt.*;
 import java.util.Collections;
 
+/*
+ * Courtesy of AzureDoom on Github.
+ */
 public class GeoProjectilesRenderer<T extends Entity & IAnimatable> extends EntityRenderer<T> implements IGeoRenderer<T> {
 
 	static {

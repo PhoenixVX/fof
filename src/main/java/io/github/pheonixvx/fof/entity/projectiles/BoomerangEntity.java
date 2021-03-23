@@ -1,6 +1,7 @@
-package io.github.pheonixvx.fof.entity;
+package io.github.pheonixvx.fof.entity.projectiles;
 
 import io.github.pheonixvx.fof.client.FOFClient;
+import io.github.pheonixvx.fof.entity.EntitySpawnPacket;
 import io.github.pheonixvx.fof.registry.RegistryEntity;
 import io.github.pheonixvx.fof.registry.RegistryItem;
 import net.minecraft.entity.Entity;

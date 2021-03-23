@@ -61,6 +61,10 @@ public class FOFClient implements ClientModInitializer {
 			RegistryEntity.ELDRITCH_GOWN_ENTITY_TYPE,
 			(dispatcher, context) -> new EldritchGownRenderer(dispatcher)
 		);
+		EntityRendererRegistry.INSTANCE.register(
+			RegistryEntity.NETHER_ABOMINATION_SKELETON_PROJECTILE_ENTITY_TYPE,
+			(dispatcher, context) -> new AbominationSkeletonProjectileEntityRenderer(dispatcher)
+		);
 		receiveEntityPacket();
 	}
 

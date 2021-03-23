@@ -1,6 +1,9 @@
 package io.github.pheonixvx.fof.registry;
 
 import io.github.pheonixvx.fof.entity.*;
+import io.github.pheonixvx.fof.entity.projectiles.AbominationSkeletonProjectileEntity;
+import io.github.pheonixvx.fof.entity.projectiles.BombEntity;
+import io.github.pheonixvx.fof.entity.projectiles.BoomerangEntity;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -19,6 +22,7 @@ import net.minecraft.world.Heightmap;
 @SuppressWarnings("deprecation")
 public class RegistryEntity {
 
+	// Projectiles
 	public static final EntityType<BoomerangEntity> BOOMERANG_ENTITY_TYPE = Registry.register(
 		Registry.ENTITY_TYPE,
 		new Identifier(RegistryHandler.MOD_ID, "boomerang_entity"),
@@ -38,7 +42,17 @@ public class RegistryEntity {
 			.trackedUpdateRate(10)
 			.build()
 	);
+	
+	public static final EntityType<AbominationSkeletonProjectileEntity> NETHER_ABOMINATION_SKELETON_PROJECTILE_ENTITY_TYPE = Registry.register(
+		Registry.ENTITY_TYPE,
+		new Identifier(RegistryHandler.MOD_ID, "fof_nether_abomination_skeleton_arm"),
+		FabricEntityTypeBuilder.create(SpawnGroup.MISC, AbominationSkeletonProjectileEntity::new)
+			.trackRangeBlocks(4)
+			.trackedUpdateRate(10)
+			.build()
+	);
 
+	/// Mobs
 	public static final EntityType<DwellerBugEntity> DWELLER_BUG_ENTITY_TYPE = Registry.register(
 		Registry.ENTITY_TYPE,
 		new Identifier(RegistryHandler.MOD_ID, "fof_dweller_bug"),
