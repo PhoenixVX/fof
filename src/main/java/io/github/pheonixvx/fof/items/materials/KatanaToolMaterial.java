@@ -22,31 +22,31 @@ public class KatanaToolMaterial implements ToolMaterial {
 
 	@Override
 	public int getDurability () {
-		return 0;
+		return this.durability;
 	}
 
 	@Override
 	public float getMiningSpeedMultiplier () {
-		return 0;
+		return this.miningSpeed;
 	}
 
 	@Override
 	public float getAttackDamage () {
-		return 0;
+		return this.attackDamage;
 	}
 
 	@Override
 	public int getMiningLevel () {
-		return 0;
+		return this.miningLevel;
 	}
 
 	@Override
 	public int getEnchantability () {
-		return 0;
+		return this.enchantingLevel;
 	}
 
 	@Override
 	public Ingredient getRepairIngredient () {
-		return null;
+		return this.repairIngredient;
 	}
 }

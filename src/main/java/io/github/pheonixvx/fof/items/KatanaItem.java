@@ -1,5 +1,6 @@
 package io.github.pheonixvx.fof.items;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
@@ -14,9 +15,17 @@ public class KatanaItem extends SwordItem {
 
 	@Override
 	public boolean postHit (ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		if (attacker.getArmorItems().spliterator().getExactSizeIfKnown() == 0) {
-			attacker.damage(DamageSource.GENERIC, 5);
+		if (isNaked(target)) {
+			target.damage(DamageSource.GENERIC, 5);
 		}
 		return super.postHit(stack, target, attacker);
+	}
+
+	private boolean isNaked(Entity entity) {
+		for (ItemStack stack : entity.getArmorItems()) {
+			if (!stack.isEmpty()) return false;
+		}
+
+		return true;
 	}
 }

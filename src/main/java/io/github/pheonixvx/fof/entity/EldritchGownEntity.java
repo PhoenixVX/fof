@@ -4,8 +4,10 @@ import io.github.pheonixvx.fof.entity.goals.EntityMeleeAttack;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.Monster;
@@ -77,20 +79,19 @@ public class EldritchGownEntity extends HostileEntity implements Monster, IAnima
 	}
 
 	@Override
-	protected void applyDamage (DamageSource source, float amount) {
-		if (source.getAttacker() instanceof PlayerEntity) {
-			PlayerEntity entity = (PlayerEntity) source.getAttacker();
+	public boolean tryAttack (Entity target) {
+		if (target instanceof PlayerEntity) {
+			PlayerEntity entity = (PlayerEntity) target;
 			ItemStack stack = entity.inventory.getArmorStack(2);
 
 			Map<Enchantment, Integer> enchants = EnchantmentHelper.get(stack);
 			if (enchants.containsKey(Enchantments.PROTECTION) && !this.world.isClient) {
-				super.applyDamage(source, amount * 8);
-			} else if (!enchants.isEmpty() && !this.world.isClient) {
-				super.applyDamage(source, amount * 5); // 15 damage essentially.
+				entity.damage(DamageSource.GENERIC, (float) (this.getAttributeBaseValue(EntityAttributes.GENERIC_ATTACK_DAMAGE) * 3));
+			} else {
+				this.dealDamage(this, target);
 			}
-		} else {
-			super.applyDamage(source, amount);
 		}
+		return super.tryAttack(target);
 	}
 
 	@Override

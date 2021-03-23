@@ -85,21 +85,21 @@ public class RegistryEntity {
 			DWELLER_BUG_ENTITY_TYPE,
 			DwellerBugEntity.createMobAttributes()
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 7)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.170F)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.425F)
 		);
 
 		FabricDefaultAttributeRegistry.register(
 			ABOMINATION_SKELETON_ENTITY_TYPE,
 			AbominationSkeletonEntity.createMobAttributes()
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.525F)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2625F)
 		);
 
 		FabricDefaultAttributeRegistry.register(
 			NETHER_ABOMINATION_SKELETON_ENTITY_TYPE,
 			NetherAbominationSkeletonEntity.createMobAttributes()
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.525F)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2625F)
 		);
 
 		FabricDefaultAttributeRegistry.register(
@@ -184,7 +184,7 @@ public class RegistryEntity {
 			biomeSelectionContext -> true,
 			SpawnGroup.MONSTER,
 			GOLIATH_WOLF_ENTITY_TYPE,
-			2,
+			1,
 			2,
 			4
 		);
