@@ -4,6 +4,7 @@ import io.github.pheonixvx.fof.blocks.LootGrassBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -18,7 +19,7 @@ public class RegistryBlock {
 	);
 
 	public static final Block FOF_LOOT_GRASS = new LootGrassBlock(
-		FabricBlockSettings.of(Material.PLANT).breakByHand(true).nonOpaque().noCollision()
+		FabricBlockSettings.of(Material.SOLID_ORGANIC).breakByHand(true).nonOpaque().ticksRandomly().noCollision().sounds(BlockSoundGroup.GRASS).strength(0.6F)
 	);
 
 	public static void initializeBlocks () {

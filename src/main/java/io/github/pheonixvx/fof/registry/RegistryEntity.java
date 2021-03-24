@@ -9,15 +9,16 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.WorldAccess;
+
+import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class RegistryEntity {
@@ -136,7 +137,7 @@ public class RegistryEntity {
 			DWELLER_BUG_ENTITY_TYPE,
 			SpawnRestriction.Location.ON_GROUND,
 			Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-			MobEntity::canMobSpawn
+			RegistryEntity::canDwellerBugSpawn
 		);
 
 		SpawnRestrictionAccessor.callRegister(
@@ -211,5 +212,14 @@ public class RegistryEntity {
 			3,
 			4
 		);
+	}
+
+	public static boolean canDwellerBugSpawn(EntityType<? extends MobEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+		BlockPos blockPos = pos.down();
+		if (world.getBlockState(blockPos).equals(Blocks.CAVE_AIR.getDefaultState())) {
+			return spawnReason == SpawnReason.SPAWNER || world.getBlockState(blockPos).allowsSpawning(world, blockPos, type);
+		} else {
+			return false;
+		}
 	}
 }
