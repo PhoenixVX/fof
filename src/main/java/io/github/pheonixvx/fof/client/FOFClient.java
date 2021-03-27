@@ -27,6 +27,7 @@ public class FOFClient implements ClientModInitializer {
 
 	public static final Identifier PACKET_ID_BOOMERANG = new Identifier(RegistryHandler.MOD_ID, "boomerang_packet");
 	public static final Identifier PACKET_ID_BOMB = new Identifier(RegistryHandler.MOD_ID, "bomb_packet");
+	public static final Identifier PACKET_ID_NETHER_ABOMINATION_SKELETON_ARM = new Identifier(RegistryHandler.MOD_ID, "nether_abomination_skeleton_arm");
 
 	@Override
 	public void onInitializeClient () {
@@ -94,6 +95,29 @@ public class FOFClient implements ClientModInitializer {
 		});
 
 		ClientSidePacketRegistry.INSTANCE.register(PACKET_ID_BOMB, (ctx, byteBuf) -> {
+			EntityType<?> et = Registry.ENTITY_TYPE.get(byteBuf.readVarInt());
+			UUID uuid = byteBuf.readUuid();
+			int entityId = byteBuf.readVarInt();
+			Vec3d pos = EntitySpawnPacket.PacketBufUtil.readVec3d(byteBuf);
+			float pitch = EntitySpawnPacket.PacketBufUtil.readAngle(byteBuf);
+			float yaw = EntitySpawnPacket.PacketBufUtil.readAngle(byteBuf);
+			ctx.getTaskQueue().execute(() -> {
+				if (MinecraftClient.getInstance().world == null)
+					throw new IllegalStateException("Tried to spawn entity in a null world!");
+				Entity e = et.create(MinecraftClient.getInstance().world);
+				if (e == null)
+					throw new IllegalStateException("Failed to create instance of entity \"" + Registry.ENTITY_TYPE.getId(et) + "\"!");
+				e.updateTrackedPosition(pos);
+				e.setPos(pos.x, pos.y, pos.z);
+				e.pitch = pitch;
+				e.yaw = yaw;
+				e.setEntityId(entityId);
+				e.setUuid(uuid);
+				MinecraftClient.getInstance().world.addEntity(entityId, e);
+			});
+		});
+
+		ClientSidePacketRegistry.INSTANCE.register(PACKET_ID_NETHER_ABOMINATION_SKELETON_ARM, (ctx, byteBuf) -> {
 			EntityType<?> et = Registry.ENTITY_TYPE.get(byteBuf.readVarInt());
 			UUID uuid = byteBuf.readUuid();
 			int entityId = byteBuf.readVarInt();

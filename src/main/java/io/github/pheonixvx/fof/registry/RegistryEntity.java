@@ -47,7 +47,7 @@ public class RegistryEntity {
 	public static final EntityType<AbominationSkeletonProjectileEntity> NETHER_ABOMINATION_SKELETON_PROJECTILE_ENTITY_TYPE = Registry.register(
 		Registry.ENTITY_TYPE,
 		new Identifier(RegistryHandler.MOD_ID, "fof_nether_abomination_skeleton_arm"),
-		FabricEntityTypeBuilder.create(SpawnGroup.MISC, AbominationSkeletonProjectileEntity::new)
+		FabricEntityTypeBuilder.<AbominationSkeletonProjectileEntity>create(SpawnGroup.MISC, AbominationSkeletonProjectileEntity::new)
 			.trackRangeBlocks(4)
 			.trackedUpdateRate(10)
 			.build()
@@ -71,7 +71,8 @@ public class RegistryEntity {
 			.build()
 	);
 
-	public static final EntityType<NetherAbominationSkeletonEntity> NETHER_ABOMINATION_SKELETON_ENTITY_TYPE = Registry.register(
+	public static final EntityType<NetherAbominationSkeletonEntity> NETHER_ABOMINATION_SKELETON_ENTITY_TYPE
+		= Registry.register(
 		Registry.ENTITY_TYPE,
 		new Identifier(RegistryHandler.MOD_ID, "fof_nether_abomination_skeleton"),
 		FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, NetherAbominationSkeletonEntity::new)
