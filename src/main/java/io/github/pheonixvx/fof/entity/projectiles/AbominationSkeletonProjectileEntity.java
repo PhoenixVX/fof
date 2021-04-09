@@ -9,7 +9,6 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.Packet;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -39,7 +38,7 @@ public class AbominationSkeletonProjectileEntity extends PersistentProjectileEnt
 		double vectorY = target.getBodyY(0.3333333333333333D) - pos.getY();
 		double vectorZ = target.getZ() - pos.getZ();
 		double sqrtVector = MathHelper.sqrt(vectorX * vectorX + vectorZ * vectorZ);
-		this.setVelocity(vectorX, vectorY + sqrtVector * 0.20000000298023224D, vectorZ, 0.0000000000001F, (float)(14 - this.world.getDifficulty().getId() * 4));
+		this.setVelocity(vectorX, vectorY + sqrtVector * 0.20000000298023224D, vectorZ, 1.6F, (float)(14 - this.world.getDifficulty().getId() * 4));
 		Random random = new Random();
 		this.playSound(SoundEvents.ENTITY_SKELETON_SHOOT, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 0.8F));
 		this.world.spawnEntity(this);

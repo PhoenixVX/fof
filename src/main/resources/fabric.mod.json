@@ -20,9 +20,6 @@
       "io.github.pheonixvx.fof.FOF"
     ]
   },
-  "mixins": [
-    "FOF.mixins.json"
-  ],
   "depends": {
     "fabricloader": ">=0.10.8",
     "fabric": "*",

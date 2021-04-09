@@ -118,6 +118,8 @@ public class RegistryEntity {
 				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2625F)
 		);
 
+
+
 		FabricDefaultAttributeRegistry.register(
 			GOLIATH_WOLF_ENTITY_TYPE,
 			GoliathWolfEntity.createMobAttributes()
@@ -138,35 +140,35 @@ public class RegistryEntity {
 			DWELLER_BUG_ENTITY_TYPE,
 			SpawnRestriction.Location.ON_GROUND,
 			Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-			RegistryEntity::canDwellerBugSpawn
+			RegistryEntity::canEntitySpawn
 		);
 
 		SpawnRestrictionAccessor.callRegister(
 			ABOMINATION_SKELETON_ENTITY_TYPE,
 			SpawnRestriction.Location.ON_GROUND,
 			Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-			MobEntity::canMobSpawn
+			RegistryEntity::canEntitySpawn
 		);
 
 		SpawnRestrictionAccessor.callRegister(
 			NETHER_ABOMINATION_SKELETON_ENTITY_TYPE,
 			SpawnRestriction.Location.ON_GROUND,
 			Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-			MobEntity::canMobSpawn
+			RegistryEntity::canEntitySpawn
 		);
 
 		SpawnRestrictionAccessor.callRegister(
 			GOLIATH_WOLF_ENTITY_TYPE,
 			SpawnRestriction.Location.ON_GROUND,
 			Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-			MobEntity::canMobSpawn
+			RegistryEntity::canEntitySpawn
 		);
 
 		SpawnRestrictionAccessor.callRegister(
 			ELDRITCH_GOWN_ENTITY_TYPE,
 			SpawnRestriction.Location.ON_GROUND,
 			Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-			MobEntity::canMobSpawn
+			RegistryEntity::canEntitySpawn
 		);
 
 		BiomeModifications.addSpawn(
@@ -215,7 +217,7 @@ public class RegistryEntity {
 		);
 	}
 
-	public static boolean canDwellerBugSpawn(EntityType<? extends MobEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+	public static boolean canEntitySpawn(EntityType<? extends MobEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
 		BlockPos blockPos = pos.down();
 		if (world.getBlockState(blockPos).equals(Blocks.CAVE_AIR.getDefaultState())) {
 			return spawnReason == SpawnReason.SPAWNER || world.getBlockState(blockPos).allowsSpawning(world, blockPos, type);

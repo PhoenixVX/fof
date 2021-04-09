@@ -46,9 +46,10 @@ public class BombEntity extends ThrownItemEntity {
 				position.getX(),
 				position.getY(),
 				position.getZ(),
-				0.1f,
-				Explosion.DestructionType.DESTROY
+				1.0f,
+				Explosion.DestructionType.BREAK
 			);
 		}
+		this.remove();
 	}
 }
