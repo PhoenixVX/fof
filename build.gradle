@@ -26,7 +26,16 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     // GeckoLib
-    modImplementation "software.bernie.geckolib:geckolib-fabric-1.16.5:3.0.23:dev"
+    modImplementation "software.bernie.geckolib:geckolib-fabric-1.16.5:${project.geckolib_version}:dev"
+
+    // Cloth config / Auto config
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
+            exclude(group: "net.fabricmc.fabric-api")
+    }
+    include("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}")
+
+    // Mod menu
+    modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
 
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.

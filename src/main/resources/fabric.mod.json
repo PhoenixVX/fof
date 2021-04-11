@@ -13,6 +13,9 @@
   "icon": "assets/fof/icon.png",
   "environment": "*",
   "entrypoints": {
+    "modmenu": [
+      "io.github.pheonixvx.fof.config.ModMenuIntegration"
+    ],
     "client": [
       "io.github.pheonixvx.fof.client.FOFClient"
     ],
