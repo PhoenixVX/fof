@@ -6,7 +6,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
-public class RegistryHandler {
+public class RegistryHelper {
 
 	public static String MOD_ID = "fof";
 	public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.create(

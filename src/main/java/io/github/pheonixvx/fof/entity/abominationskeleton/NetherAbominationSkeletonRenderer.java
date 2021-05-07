@@ -1,8 +1,6 @@
-package io.github.pheonixvx.fof.entity.renderers;
+package io.github.pheonixvx.fof.entity.abominationskeleton;
 
-import io.github.pheonixvx.fof.entity.NetherAbominationSkeletonEntity;
-import io.github.pheonixvx.fof.entity.models.NetherAbominationSkeletonEntityModel;
-import io.github.pheonixvx.fof.registry.RegistryHandler;
+import io.github.pheonixvx.fof.registry.RegistryHelper;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -13,10 +11,10 @@ import software.bernie.geckolib3.renderer.geo.GeoEntityRenderer;
 
 public class NetherAbominationSkeletonRenderer extends GeoEntityRenderer<NetherAbominationSkeletonEntity> {
 
-	Identifier texture = new Identifier(RegistryHandler.MOD_ID, "textures/entity/fof_nether_abomination_skeleton.png");
+	Identifier texture = new Identifier(RegistryHelper.MOD_ID, "textures/entity/fof_nether_abomination_skeleton.png");
 
 	public NetherAbominationSkeletonRenderer (EntityRenderDispatcher renderManager) {
-		super(renderManager, new NetherAbominationSkeletonEntityModel());
+		super(renderManager, new AbominationSkeletonModel(true));
 	}
 
 	@Override

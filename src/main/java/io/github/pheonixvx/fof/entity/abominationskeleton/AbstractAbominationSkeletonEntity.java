@@ -1,4 +1,4 @@
-package io.github.pheonixvx.fof.entity;
+package io.github.pheonixvx.fof.entity.abominationskeleton;
 
 import io.github.pheonixvx.fof.entity.goals.EntityMeleeAttack;
 import net.minecraft.entity.EntityType;

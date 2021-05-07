@@ -1,10 +1,15 @@
 package io.github.pheonixvx.fof.client;
 
 import io.github.pheonixvx.fof.entity.EntitySpawnPacket;
-import io.github.pheonixvx.fof.entity.renderers.*;
+import io.github.pheonixvx.fof.entity.abominationskeleton.AbominationSkeletonProjectileEntityRenderer;
+import io.github.pheonixvx.fof.entity.abominationskeleton.AbominationSkeletonRenderer;
+import io.github.pheonixvx.fof.entity.abominationskeleton.NetherAbominationSkeletonRenderer;
+import io.github.pheonixvx.fof.entity.dwellerbug.DwellerBugRenderer;
+import io.github.pheonixvx.fof.entity.eldritchgown.EldritchGownRenderer;
+import io.github.pheonixvx.fof.entity.goliathwolf.GoliathWolfRenderer;
 import io.github.pheonixvx.fof.registry.RegistryBlock;
 import io.github.pheonixvx.fof.registry.RegistryEntity;
-import io.github.pheonixvx.fof.registry.RegistryHandler;
+import io.github.pheonixvx.fof.registry.RegistryHelper;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -25,9 +30,9 @@ import java.util.UUID;
 @Environment(EnvType.CLIENT)
 public class FOFClient implements ClientModInitializer {
 
-	public static final Identifier PACKET_ID_BOOMERANG = new Identifier(RegistryHandler.MOD_ID, "boomerang_packet");
-	public static final Identifier PACKET_ID_BOMB = new Identifier(RegistryHandler.MOD_ID, "bomb_packet");
-	public static final Identifier PACKET_ID_NETHER_ABOMINATION_SKELETON_ARM = new Identifier(RegistryHandler.MOD_ID, "nether_abomination_skeleton_arm");
+	public static final Identifier PACKET_ID_BOOMERANG = new Identifier(RegistryHelper.MOD_ID, "boomerang_packet");
+	public static final Identifier PACKET_ID_BOMB = new Identifier(RegistryHelper.MOD_ID, "bomb_packet");
+	public static final Identifier PACKET_ID_NETHER_ABOMINATION_SKELETON_ARM = new Identifier(RegistryHelper.MOD_ID, "nether_abomination_skeleton_arm");
 
 	@Override
 	public void onInitializeClient () {

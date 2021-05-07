@@ -25,17 +25,17 @@ public class RegistryBlock {
 	public static void initializeBlocks () {
 		Registry.register(
 			Registry.BLOCK,
-			new Identifier(RegistryHandler.MOD_ID, "fof_zuubee_mound"),
+			new Identifier(RegistryHelper.MOD_ID, "fof_zuubee_mound"),
 			FOF_ZUUBEE_MOUND
 		);
 		Registry.register(
 			Registry.BLOCK,
-			new Identifier(RegistryHandler.MOD_ID, "fof_zuubee_block"),
+			new Identifier(RegistryHelper.MOD_ID, "fof_zuubee_block"),
 			FOF_ZUUBEE_BLOCK
 		);
 		Registry.register(
 			Registry.BLOCK,
-			new Identifier(RegistryHandler.MOD_ID, "fof_loot_grass"),
+			new Identifier(RegistryHelper.MOD_ID, "fof_loot_grass"),
 			FOF_LOOT_GRASS
 		);
 	}

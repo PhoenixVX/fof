@@ -1,7 +1,7 @@
 package io.github.pheonixvx.fof;
 
 import io.github.pheonixvx.fof.config.ModConfig;
-import io.github.pheonixvx.fof.registry.RegistryHandler;
+import io.github.pheonixvx.fof.registry.RegistryHelper;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
@@ -17,7 +17,7 @@ public class FOF implements ModInitializer {
 	public void onInitialize () {
 		LOGGER.info("Forge of Fiends is loading...");
 		AutoConfig.register(ModConfig.class, Toml4jConfigSerializer::new);
-		RegistryHandler.initializeRegistries();
+		RegistryHelper.initializeRegistries();
 		GeckoLib.initialize();
 	}
 

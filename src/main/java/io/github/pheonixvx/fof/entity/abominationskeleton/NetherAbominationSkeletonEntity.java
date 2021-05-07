@@ -1,5 +1,6 @@
-package io.github.pheonixvx.fof.entity;
+package io.github.pheonixvx.fof.entity.abominationskeleton;
 
+import io.github.pheonixvx.fof.entity.abominationskeleton.AbstractAbominationSkeletonEntity;
 import io.github.pheonixvx.fof.entity.projectiles.AbominationSkeletonProjectileEntity;
 import io.github.pheonixvx.fof.registry.RegistryEntity;
 import net.minecraft.entity.Entity;

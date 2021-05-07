@@ -1,4 +1,4 @@
-package io.github.pheonixvx.fof.entity.renderers;
+package io.github.pheonixvx.fof.entity.abominationskeleton;
 
 import io.github.pheonixvx.fof.client.GeoProjectilesRenderer;
 import io.github.pheonixvx.fof.entity.models.AbominationSkeletonProjectileEntityModel;

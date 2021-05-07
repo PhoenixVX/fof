@@ -28,7 +28,7 @@ public class RegistryOres {
 	public static void initializeOres () {
 		RegistryKey<ConfiguredFeature<?, ?>> ZUUBEE_MOUND = RegistryKey.of(
 			Registry.CONFIGURED_FEATURE_WORLDGEN,
-			new Identifier(RegistryHandler.MOD_ID, "zuubee_mound")
+			new Identifier(RegistryHelper.MOD_ID, "zuubee_mound")
 		);
 		Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, ZUUBEE_MOUND.getValue(), FOF_ZUUBEE_MOUND);
 		BiomeModifications.addFeature(

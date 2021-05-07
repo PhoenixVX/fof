@@ -1,8 +1,6 @@
-package io.github.pheonixvx.fof.entity.renderers;
+package io.github.pheonixvx.fof.entity.eldritchgown;
 
-import io.github.pheonixvx.fof.entity.EldritchGownEntity;
-import io.github.pheonixvx.fof.entity.models.EldritchGownModel;
-import io.github.pheonixvx.fof.registry.RegistryHandler;
+import io.github.pheonixvx.fof.registry.RegistryHelper;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -13,7 +11,7 @@ import software.bernie.geckolib3.renderer.geo.GeoEntityRenderer;
 
 public class EldritchGownRenderer extends GeoEntityRenderer<EldritchGownEntity> {
 
-	private static final Identifier texture = new Identifier(RegistryHandler.MOD_ID, "textures/entity/fof_eldritch_gown.png");
+	private static final Identifier texture = new Identifier(RegistryHelper.MOD_ID, "textures/entity/fof_eldritch_gown.png");
 
 	public EldritchGownRenderer (EntityRenderDispatcher renderManager) {
 		super(renderManager, new EldritchGownModel());

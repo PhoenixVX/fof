@@ -17,18 +17,18 @@ public class RegistryItem {
 	// Items
 	public static final Item FOF_BOOMERANG = new BoomerangItem(
 		new FabricItemSettings()
-			.group(RegistryHandler.ITEM_GROUP)
+			.group(RegistryHelper.ITEM_GROUP)
 			.maxDamage(9));
 
 	public static final Item FOF_BOMB = new BombItem(
 		new FabricItemSettings()
-			.group(RegistryHandler.ITEM_GROUP)
+			.group(RegistryHelper.ITEM_GROUP)
 			.maxCount(16)
 	);
 
 	public static final Item FOF_ZUUBEE = new Item(
 		new FabricItemSettings()
-			.group(RegistryHandler.ITEM_GROUP)
+			.group(RegistryHelper.ITEM_GROUP)
 			.rarity(Rarity.EPIC)
 	);
 
@@ -38,7 +38,7 @@ public class RegistryItem {
 		5,
 		-2.4F,
 		new FabricItemSettings()
-			.group(RegistryHandler.ITEM_GROUP)
+			.group(RegistryHelper.ITEM_GROUP)
 			.rarity(Rarity.UNCOMMON)
 			.maxCount(1)
 	);
@@ -48,7 +48,7 @@ public class RegistryItem {
 		6,
 		-2.4F,
 		new FabricItemSettings()
-			.group(RegistryHandler.ITEM_GROUP)
+			.group(RegistryHelper.ITEM_GROUP)
 			.rarity(Rarity.UNCOMMON)
 			.maxCount(1)
 	);
@@ -58,7 +58,7 @@ public class RegistryItem {
 		7,
 		-2.4F,
 		new FabricItemSettings()
-			.group(RegistryHandler.ITEM_GROUP)
+			.group(RegistryHelper.ITEM_GROUP)
 			.rarity(Rarity.UNCOMMON)
 			.maxCount(1)
 	);
@@ -68,7 +68,7 @@ public class RegistryItem {
 		5,
 		-2F,
 		new FabricItemSettings()
-			.group(RegistryHandler.ITEM_GROUP)
+			.group(RegistryHelper.ITEM_GROUP)
 			.rarity(Rarity.UNCOMMON)
 			.maxCount(1)
 	);
@@ -77,95 +77,95 @@ public class RegistryItem {
 	public static void initializeItems () {
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_boomerang"),
+			new Identifier(RegistryHelper.MOD_ID, "fof_boomerang"),
 			FOF_BOOMERANG
 		);
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_bomb"),
+			new Identifier(RegistryHelper.MOD_ID, "fof_bomb"),
 			FOF_BOMB
 		);
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_zuubee"),
+			new Identifier(RegistryHelper.MOD_ID, "fof_zuubee"),
 			FOF_ZUUBEE
 		);
 
 		// Swords
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_iron_cutlass"),
+			new Identifier(RegistryHelper.MOD_ID, "fof_iron_cutlass"),
 			FOF_IRON_CUTLASS
 		);
 
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_diamond_cutlass"),
+			new Identifier(RegistryHelper.MOD_ID, "fof_diamond_cutlass"),
 			FOF_DIAMOND_CUTLASS
 		);
 
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_netherite_cutlass"),
+			new Identifier(RegistryHelper.MOD_ID, "fof_netherite_cutlass"),
 			FOF_NETHERITE_CUTLASS
 		);
 
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_katana"),
+			new Identifier(RegistryHelper.MOD_ID, "fof_katana"),
 			FOF_KATANA
 		);
 
 		// Spawn eggs
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_abomination_skeleton"),
-			new SpawnEggItem(RegistryEntity.ABOMINATION_SKELETON_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16))
+			new Identifier(RegistryHelper.MOD_ID, "fof_spawn_abomination_skeleton"),
+			new SpawnEggItem(RegistryEntity.ABOMINATION_SKELETON_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHelper.ITEM_GROUP).maxCount(16))
 		);
 
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_nether_abomination_skeleton"),
-			new SpawnEggItem(RegistryEntity.NETHER_ABOMINATION_SKELETON_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16))
+			new Identifier(RegistryHelper.MOD_ID, "fof_spawn_nether_abomination_skeleton"),
+			new SpawnEggItem(RegistryEntity.NETHER_ABOMINATION_SKELETON_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHelper.ITEM_GROUP).maxCount(16))
 		);
 
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_goliath_wolf"),
-			new SpawnEggItem(RegistryEntity.GOLIATH_WOLF_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16))
+			new Identifier(RegistryHelper.MOD_ID, "fof_spawn_goliath_wolf"),
+			new SpawnEggItem(RegistryEntity.GOLIATH_WOLF_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHelper.ITEM_GROUP).maxCount(16))
 		);
 
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_dweller_bug"),
-			new SpawnEggItem(RegistryEntity.DWELLER_BUG_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16))
+			new Identifier(RegistryHelper.MOD_ID, "fof_spawn_dweller_bug"),
+			new SpawnEggItem(RegistryEntity.DWELLER_BUG_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHelper.ITEM_GROUP).maxCount(16))
 		);
 
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_spawn_eldritch_gown"),
-			new SpawnEggItem(RegistryEntity.ELDRITCH_GOWN_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHandler.ITEM_GROUP).maxCount(16))
+			new Identifier(RegistryHelper.MOD_ID, "fof_spawn_eldritch_gown"),
+			new SpawnEggItem(RegistryEntity.ELDRITCH_GOWN_ENTITY_TYPE, 0x00FFFFFF, 0x00FFFFFF, new Item.Settings().group(RegistryHelper.ITEM_GROUP).maxCount(16))
 		);
 
 
 		// Block Items
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_zuubee_mound"),
+			new Identifier(RegistryHelper.MOD_ID, "fof_zuubee_mound"),
 			new BlockItem(RegistryBlock.FOF_ZUUBEE_MOUND,
-				new Item.Settings().group(RegistryHandler.ITEM_GROUP))
+				new Item.Settings().group(RegistryHelper.ITEM_GROUP))
 		);
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_zuubee_block"),
+			new Identifier(RegistryHelper.MOD_ID, "fof_zuubee_block"),
 			new BlockItem(RegistryBlock.FOF_ZUUBEE_BLOCK,
-				new Item.Settings().group(RegistryHandler.ITEM_GROUP))
+				new Item.Settings().group(RegistryHelper.ITEM_GROUP))
 		);
 		Registry.register(
 			Registry.ITEM,
-			new Identifier(RegistryHandler.MOD_ID, "fof_loot_grass"),
+			new Identifier(RegistryHelper.MOD_ID, "fof_loot_grass"),
 			new BlockItem(RegistryBlock.FOF_LOOT_GRASS,
-				new Item.Settings().group(RegistryHandler.ITEM_GROUP))
+				new Item.Settings().group(RegistryHelper.ITEM_GROUP))
 		);
 	}
 }

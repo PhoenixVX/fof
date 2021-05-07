@@ -1,4 +1,4 @@
-package io.github.pheonixvx.fof.entity;
+package io.github.pheonixvx.fof.entity.eldritchgown;
 
 import io.github.pheonixvx.fof.entity.goals.EntityMeleeAttack;
 import net.minecraft.enchantment.Enchantment;
