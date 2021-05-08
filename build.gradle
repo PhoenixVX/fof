@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.6-SNAPSHOT'
+    id 'fabric-loom' version '0.7-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -36,6 +36,17 @@ dependencies {
 
     // Mod menu
     modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
+
+    // Mod compatibility
+    /*modImplementation("com.github.benfah:DoorsOfInfinity:${project.doorsofinfinity_version}") {
+        exclude group: "me.shedaniel.cloth", module: "config-2"
+        exclude group: "me.sargunvohra.mcmods", module: "autoconfig1u"
+    }
+
+    // Dependencies for mod compatibility smh
+    modImplementation("com.github.qouteall.ImmersivePortalsMod:build:1.16-SNAPSHOT") {
+        exclude group: "net.fabricmc.fabric-api"
+    }*/
 
     // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
     // You may need to force-disable transitiveness on them.

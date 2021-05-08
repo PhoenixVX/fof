@@ -225,6 +225,7 @@ public class RegistryEntity {
 	}
 
 	public static boolean canEntitySpawn(EntityType<? extends MobEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+		// && !world.equals(MCUtils.getServer().getWorld(DOFDimensions.INFINITY_DIM)
 		return world.getBlockState(pos.down()).equals(Blocks.CAVE_AIR.getDefaultState()) && !((World) world).isDay();
 	}
 }
