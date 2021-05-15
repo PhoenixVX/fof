@@ -1,12 +1,15 @@
 package io.github.pheonixvx.fof.entity.eldritchgown;
 
 import io.github.pheonixvx.fof.entity.goals.EntityMeleeAttack;
+import io.github.pheonixvx.fof.entity.goliathwolf.GoliathWolfEntity;
+import io.github.pheonixvx.fof.registry.RegistryHelper;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
@@ -31,6 +34,10 @@ public class EldritchGownEntity extends HostileEntity implements Monster, IAnima
 	public EldritchGownEntity (EntityType<? extends HostileEntity> entityType, World world) {
 		super(entityType, world);
 		this.ignoreCameraFrustum = true;
+	}
+
+	public static DefaultAttributeContainer.Builder createEldritchGownAttributes() {
+		return EldritchGownEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, RegistryHelper.config.ELDRITCH_GOWN_MAX_HEALTH).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.ELDRITCH_GOWN_ATTACK_DAMAGE);
 	}
 
 	@Override

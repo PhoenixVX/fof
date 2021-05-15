@@ -1,6 +1,5 @@
 package io.github.pheonixvx.fof.registry;
 
-import io.github.pheonixvx.fof.config.ModConfig;
 import io.github.pheonixvx.fof.entity.abominationskeleton.AbominationSkeletonEntity;
 import io.github.pheonixvx.fof.entity.abominationskeleton.NetherAbominationSkeletonEntity;
 import io.github.pheonixvx.fof.entity.dwellerbug.DwellerBugEntity;
@@ -9,7 +8,6 @@ import io.github.pheonixvx.fof.entity.goliathwolf.GoliathWolfEntity;
 import io.github.pheonixvx.fof.entity.projectiles.AbominationSkeletonProjectileEntity;
 import io.github.pheonixvx.fof.entity.projectiles.BombEntity;
 import io.github.pheonixvx.fof.entity.projectiles.BoomerangEntity;
-import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -104,43 +102,14 @@ public class RegistryEntity {
 	);
 
 	public static void initializeEntities () {
-		ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+		FabricDefaultAttributeRegistry.register(DWELLER_BUG_ENTITY_TYPE, DwellerBugEntity.createDwellerBugAttributes());
 
-		FabricDefaultAttributeRegistry.register(
-			DWELLER_BUG_ENTITY_TYPE,
-			DwellerBugEntity.createMobAttributes()
-				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, config.DWELLER_BUG_ATTACK_DAMAGE)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, config.DWELLER_BUG_MOVEMENT_SPEED)
-		);
+		// TO-DO: Simplify Abomination Skeleton Attributes
+		FabricDefaultAttributeRegistry.register(ABOMINATION_SKELETON_ENTITY_TYPE, AbominationSkeletonEntity.createMobAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.ABOMINATION_SKELETON_ATTACK_DAMAGE).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.ABOMINATION_SKELETON_MOVEMENT_SPEED));
+		FabricDefaultAttributeRegistry.register(NETHER_ABOMINATION_SKELETON_ENTITY_TYPE, NetherAbominationSkeletonEntity.createMobAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.NETHER_ABOMINATION_SKELETON_ATTACK_DAMAGE).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.NETHER_ABOMINATION_SKELETON_MOVEMENT_SPEED));
 
-		FabricDefaultAttributeRegistry.register(
-			ABOMINATION_SKELETON_ENTITY_TYPE,
-			AbominationSkeletonEntity.createMobAttributes()
-				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, config.ABOMINATION_SKELETON_ATTACK_DAMAGE)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, config.ABOMINATION_SKELETON_MOVEMENT_SPEED)
-		);
-
-		FabricDefaultAttributeRegistry.register(
-			NETHER_ABOMINATION_SKELETON_ENTITY_TYPE,
-			NetherAbominationSkeletonEntity.createMobAttributes()
-				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, config.NETHER_ABOMINATION_SKELETON_ATTACK_DAMAGE)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, config.NETHER_ABOMINATION_SKELETON_MOVEMENT_SPEED)
-		);
-
-		FabricDefaultAttributeRegistry.register(
-			GOLIATH_WOLF_ENTITY_TYPE,
-			GoliathWolfEntity.createMobAttributes()
-				.add(EntityAttributes.GENERIC_MAX_HEALTH, config.GOLIATH_WOLF_MAX_HEALTH)
-				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, config.GOLIATH_WOLF_ATTACK_DAMAGE)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, config.GOLIATH_WOLF_MOVEMENT_SPEED)
-		);
-
-		FabricDefaultAttributeRegistry.register(
-			ELDRITCH_GOWN_ENTITY_TYPE,
-			EldritchGownEntity.createMobAttributes()
-				.add(EntityAttributes.GENERIC_MAX_HEALTH, config.ELDRITCH_GOWN_MAX_HEALTH)
-				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, config.ELDRITCH_GOWN_ATTACK_DAMAGE)
-		);
+		FabricDefaultAttributeRegistry.register(GOLIATH_WOLF_ENTITY_TYPE, GoliathWolfEntity.createGoliathWolfAttributes());
+		FabricDefaultAttributeRegistry.register(ELDRITCH_GOWN_ENTITY_TYPE, EldritchGownEntity.createEldritchGownAttributes());
 
 		// Spawning Restrictions
 		SpawnRestrictionAccessor.callRegister(
@@ -182,45 +151,45 @@ public class RegistryEntity {
 			biomeSelectionContext -> true,
 			SpawnGroup.MONSTER,
 			DWELLER_BUG_ENTITY_TYPE,
-			config.DWELLER_BUG_WEIGHT,
-			config.DWELLER_BUG_MIN_SIZE,
-			config.DWELLER_BUG_MAX_SIZE
+			RegistryHelper.config.DWELLER_BUG_WEIGHT,
+			RegistryHelper.config.DWELLER_BUG_MIN_SIZE,
+			RegistryHelper.config.DWELLER_BUG_MAX_SIZE
 		);
 
 		BiomeModifications.addSpawn(
 			biomeSelectionContext -> true,
 			SpawnGroup.MONSTER,
 			ABOMINATION_SKELETON_ENTITY_TYPE,
-			config.ABOMINATION_SKELETON_WEIGHT,
-			config.ABOMINATION_SKELETON_MIN_SIZE,
-			config.ABOMINATION_SKELETON_MAX_SIZE
+			RegistryHelper.config.ABOMINATION_SKELETON_WEIGHT,
+			RegistryHelper.config.ABOMINATION_SKELETON_MIN_SIZE,
+			RegistryHelper.config.ABOMINATION_SKELETON_MAX_SIZE
 		);
 
 		BiomeModifications.addSpawn(
 			biomeSelectionContext -> true,
 			SpawnGroup.MONSTER,
 			NETHER_ABOMINATION_SKELETON_ENTITY_TYPE,
-			config.NETHER_ABOMINATION_SKELETON_WEIGHT,
-			config.NETHER_ABOMINATION_SKELETON_MIN_SIZE,
-			config.NETHER_ABOMINATION_SKELETON_MAX_SIZE
+			RegistryHelper.config.NETHER_ABOMINATION_SKELETON_WEIGHT,
+			RegistryHelper.config.NETHER_ABOMINATION_SKELETON_MIN_SIZE,
+			RegistryHelper.config.NETHER_ABOMINATION_SKELETON_MAX_SIZE
 		);
 
 		BiomeModifications.addSpawn(
 			biomeSelectionContext -> true,
 			SpawnGroup.MONSTER,
 			GOLIATH_WOLF_ENTITY_TYPE,
-			config.GOLIATH_WOLF_WEIGHT,
-			config.GOLIATH_WOLF_MIN_SIZE,
-			config.GOLIATH_WOLF_MAX_SIZE
+			RegistryHelper.config.GOLIATH_WOLF_WEIGHT,
+			RegistryHelper.config.GOLIATH_WOLF_MIN_SIZE,
+			RegistryHelper.config.GOLIATH_WOLF_MAX_SIZE
 		);
 
 		BiomeModifications.addSpawn(
 			biomeSelectionContext -> true,
 			SpawnGroup.MONSTER,
 			ELDRITCH_GOWN_ENTITY_TYPE,
-			config.ELDRITCH_GOWN_WEIGHT,
-			config.ELDRITCH_GOWN_MIN_SIZE,
-			config.ELDRITCH_GOWN_MAX_SIZE
+			RegistryHelper.config.ELDRITCH_GOWN_WEIGHT,
+			RegistryHelper.config.ELDRITCH_GOWN_MIN_SIZE,
+			RegistryHelper.config.ELDRITCH_GOWN_MAX_SIZE
 		);
 	}
 

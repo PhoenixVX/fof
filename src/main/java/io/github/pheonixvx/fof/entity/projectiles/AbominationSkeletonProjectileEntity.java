@@ -22,7 +22,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.Random;
 
-@SuppressWarnings("EntityConstructor")
+@SuppressWarnings({"EntityConstructor", "SameReturnValue"})
 public class AbominationSkeletonProjectileEntity extends PersistentProjectileEntity implements IAnimatable {
 	private final AnimationFactory factory = new AnimationFactory(this);
 

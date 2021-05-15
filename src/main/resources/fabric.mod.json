@@ -10,7 +10,7 @@
   ],
   "contact": {},
   "license": "CC0-1.0",
-  "icon": "assets/fof/icon.png",
+  "icon": "assets/fof/textures/item/fof_iron_cutlass.png",
   "environment": "*",
   "entrypoints": {
     "modmenu": [

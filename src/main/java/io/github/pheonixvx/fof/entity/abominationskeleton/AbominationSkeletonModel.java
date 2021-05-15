@@ -1,14 +1,12 @@
 package io.github.pheonixvx.fof.entity.abominationskeleton;
 
 import io.github.pheonixvx.fof.registry.RegistryHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class AbominationSkeletonModel extends AnimatedGeoModel {
 
-	private boolean isNetherSkeleton = false;
+	private final boolean isNetherSkeleton;
 
 	public AbominationSkeletonModel(boolean isNetherSkeleton) {
 		this.isNetherSkeleton = isNetherSkeleton;

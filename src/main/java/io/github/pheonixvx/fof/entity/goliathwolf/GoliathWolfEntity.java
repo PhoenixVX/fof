@@ -1,10 +1,13 @@
 package io.github.pheonixvx.fof.entity.goliathwolf;
 
 import io.github.pheonixvx.fof.entity.goals.EntityMeleeAttack;
+import io.github.pheonixvx.fof.registry.RegistryHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Saddleable;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.passive.HorseBaseEntity;
@@ -34,11 +37,15 @@ import java.util.UUID;
 @SuppressWarnings("EntityConstructor")
 public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnimatable, Saddleable {
 	private final AnimationFactory animationFactory = new AnimationFactory(this);
-	protected float jumpStrength = 0.5F;
+	protected final float jumpStrength = 0.5F;
 
 	public GoliathWolfEntity (EntityType<? extends HorseBaseEntity> entityType, World world) {
 		super(entityType, world);
 		this.ignoreCameraFrustum = true;
+	}
+
+	public static DefaultAttributeContainer.Builder createGoliathWolfAttributes() {
+		return GoliathWolfEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, RegistryHelper.config.GOLIATH_WOLF_MAX_HEALTH).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.GOLIATH_WOLF_ATTACK_DAMAGE).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.GOLIATH_WOLF_MOVEMENT_SPEED);
 	}
 
 	@Override

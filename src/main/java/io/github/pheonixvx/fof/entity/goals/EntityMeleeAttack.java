@@ -9,7 +9,7 @@ import net.minecraft.entity.mob.PathAwareEntity;
  */
 public class EntityMeleeAttack extends MeleeAttackGoal {
 
-	private double range;
+	private final double range;
 
 	public EntityMeleeAttack (PathAwareEntity mob, double speed, boolean pauseWhenMobIdle, double range) {
 		super(mob, speed, pauseWhenMobIdle);

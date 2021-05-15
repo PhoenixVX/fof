@@ -11,7 +11,7 @@ import software.bernie.geckolib3.renderer.geo.GeoEntityRenderer;
 
 public class NetherAbominationSkeletonRenderer extends GeoEntityRenderer<NetherAbominationSkeletonEntity> {
 
-	Identifier texture = new Identifier(RegistryHelper.MOD_ID, "textures/entity/fof_nether_abomination_skeleton.png");
+	private final Identifier texture = new Identifier(RegistryHelper.MOD_ID, "textures/entity/fof_nether_abomination_skeleton.png");
 
 	public NetherAbominationSkeletonRenderer (EntityRenderDispatcher renderManager) {
 		super(renderManager, new AbominationSkeletonModel(true));

@@ -13,7 +13,7 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 
 public class RegistryOres {
 
-	private static ConfiguredFeature<?, ?> FOF_ZUUBEE_MOUND = Feature.ORE
+	private static final ConfiguredFeature<?, ?> FOF_ZUUBEE_MOUND = Feature.ORE
 		                                                          .configure(
 			                                                          new OreFeatureConfig(
 				                                                          OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,

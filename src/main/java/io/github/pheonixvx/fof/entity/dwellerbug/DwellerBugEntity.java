@@ -1,8 +1,11 @@
 package io.github.pheonixvx.fof.entity.dwellerbug;
 
 import io.github.pheonixvx.fof.entity.goals.EntityMeleeAttack;
+import io.github.pheonixvx.fof.registry.RegistryHelper;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,6 +28,10 @@ public class DwellerBugEntity extends HostileEntity implements Monster, IAnimata
 		this.ignoreCameraFrustum = true;
 	}
 
+	public static DefaultAttributeContainer.Builder createDwellerBugAttributes() {
+		return DwellerBugEntity.createMobAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.DWELLER_BUG_ATTACK_DAMAGE).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.DWELLER_BUG_MOVEMENT_SPEED);
+	}
+
 	@Override
 	protected void initGoals () {
 		// Entity will walk around.
@@ -36,9 +43,9 @@ public class DwellerBugEntity extends HostileEntity implements Monster, IAnimata
 		// Entity will melee-attack
 		this.goalSelector.add(4, new EntityMeleeAttack(this, 0.250D, false, 8.0D));
 		// Entity will follow player
-		this.targetSelector.add(5, new FollowTargetGoal(this, PlayerEntity.class, true));
+		this.targetSelector.add(5, new FollowTargetGoal<>(this, PlayerEntity.class, true));
 		// Entity will attempt revenge
-		this.targetSelector.add(3, new RevengeGoal(this, new Class[0]));
+		this.targetSelector.add(3, new RevengeGoal(this));
 	}
 
 	// Animation stuff
@@ -68,7 +75,7 @@ public class DwellerBugEntity extends HostileEntity implements Monster, IAnimata
 
 	@Override
 	public void registerControllers (AnimationData animationData) {
-		animationData.addAnimationController(new AnimationController(this, "controller", 0, this::predicate));
+		animationData.addAnimationController(new AnimationController<>(this, "controller", 0, this::predicate));
 	}
 
 	@Override

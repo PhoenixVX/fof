@@ -3,6 +3,7 @@ package io.github.pheonixvx.fof.config;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 
+@SuppressWarnings("CanBeFinal") // final makes the values not change in AutoConfig.
 @Config(name = "fof")
 public class ModConfig implements ConfigData {
 	public int DWELLER_BUG_ATTACK_DAMAGE = 7;
