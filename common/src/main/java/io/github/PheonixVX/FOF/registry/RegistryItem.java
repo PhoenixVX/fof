@@ -11,63 +11,15 @@ import net.minecraft.util.Rarity;
 
 public class RegistryItem {
 
-    public static final Item FOF_BOOMERANG = new BoomerangItem(
-            new Item.Settings()
-                    .group(RegistryHelper.ITEM_GROUP)
-                    .maxDamage(9));
-
-    public static final Item FOF_BOMB = new BombItem(
-            new Item.Settings()
-                    .group(RegistryHelper.ITEM_GROUP)
-                    .maxCount(16)
-    );
-
-    public static final Item FOF_ZUUBEE = new Item(
-            new Item.Settings()
-                    .group(RegistryHelper.ITEM_GROUP)
-                    .rarity(Rarity.EPIC)
-    );
+    public static final Item FOF_BOOMERANG = new BoomerangItem(new Item.Settings().group(RegistryHelper.ITEM_GROUP).maxDamage(9));
+    public static final Item FOF_BOMB = new BombItem(new Item.Settings().group(RegistryHelper.ITEM_GROUP).maxCount(16));
+    public static final Item FOF_ZUUBEE = new Item(new Item.Settings().group(RegistryHelper.ITEM_GROUP).rarity(Rarity.EPIC));
 
     // Swords
-    public static final Item FOF_IRON_CUTLASS = new SwordItem(
-            new CutlassToolMaterial(325, 0F, 0F, 0, Ingredient.ofItems(Items.IRON_INGOT)),
-            5,
-            -2.4F,
-            new Item.Settings()
-                    .group(RegistryHelper.ITEM_GROUP)
-                    .rarity(Rarity.UNCOMMON)
-                    .maxCount(1)
-    );
-
-    public static final Item FOF_DIAMOND_CUTLASS = new SwordItem(
-            new CutlassToolMaterial(1635, 0F, 0F, 0, Ingredient.ofItems(Items.DIAMOND)),
-            6,
-            -2.4F,
-            new Item.Settings()
-                    .group(RegistryHelper.ITEM_GROUP)
-                    .rarity(Rarity.UNCOMMON)
-                    .maxCount(1)
-    );
-
-    public static final Item FOF_NETHERITE_CUTLASS = new SwordItem(
-            new CutlassToolMaterial(2105, 0F, 0F, 0, Ingredient.ofItems(Items.NETHER_GOLD_ORE)),
-            7,
-            -2.4F,
-            new Item.Settings()
-                    .group(RegistryHelper.ITEM_GROUP)
-                    .rarity(Rarity.UNCOMMON)
-                    .maxCount(1)
-    );
-
-    public static final Item FOF_KATANA = new KatanaItem(
-            new KatanaToolMaterial(1562, 0F, 0F, 0, 0, Ingredient.ofItems(Items.IRON_INGOT)),
-            5,
-            -2F,
-            new Item.Settings()
-                    .group(RegistryHelper.ITEM_GROUP)
-                    .rarity(Rarity.UNCOMMON)
-                    .maxCount(1)
-    );
+    public static final Item FOF_IRON_CUTLASS = new SwordItem(new CutlassToolMaterial(325, 0F, 0F, 0, Ingredient.ofItems(Items.IRON_INGOT)), 5, -2.4F, new Item.Settings().group(RegistryHelper.ITEM_GROUP).rarity(Rarity.UNCOMMON).maxCount(1));
+    public static final Item FOF_DIAMOND_CUTLASS = new SwordItem(new CutlassToolMaterial(1635, 0F, 0F, 0, Ingredient.ofItems(Items.DIAMOND)), 6, -2.4F, new Item.Settings().group(RegistryHelper.ITEM_GROUP).rarity(Rarity.UNCOMMON).maxCount(1));
+    public static final Item FOF_NETHERITE_CUTLASS = new SwordItem(new CutlassToolMaterial(2105, 0F, 0F, 0, Ingredient.ofItems(Items.NETHER_GOLD_ORE)), 7, -2.4F, new Item.Settings().group(RegistryHelper.ITEM_GROUP).rarity(Rarity.UNCOMMON).maxCount(1));
+    public static final Item FOF_KATANA = new KatanaItem(new KatanaToolMaterial(1562, 0F, 0F, 0, 0, Ingredient.ofItems(Items.IRON_INGOT)), 5, -2F, new Item.Settings().group(RegistryHelper.ITEM_GROUP).rarity(Rarity.UNCOMMON).maxCount(1));
 
     public static void initializeItems() {
         // Projectiles

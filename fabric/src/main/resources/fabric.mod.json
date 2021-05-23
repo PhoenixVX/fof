@@ -15,6 +15,9 @@
   "entrypoints": {
     "main": [
       "io.github.PheonixVX.FOF.FabricFOF"
+    ],
+    "client": [
+      "io.github.PheonixVX.FOF.FabricFOFClient"
     ]
   },
   "depends": {

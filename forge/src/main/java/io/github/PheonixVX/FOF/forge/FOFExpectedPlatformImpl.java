@@ -6,7 +6,4 @@ import net.minecraft.util.Identifier;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class FOFExpectedPlatformImpl {
-    public static Packet<?> createSpawnPacket(Entity entity, Identifier identifier) {
-        return NetworkHooks.getEntitySpawningPacket(entity);
-    }
 }

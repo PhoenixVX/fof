@@ -23,8 +23,17 @@ public class FOFClientProxy implements Runnable {
         RenderTypes.register(RenderLayer.getCutout(), RegistryBlock.FOF_ZUUBEE_MOUND);
         RenderTypes.register(RenderLayer.getCutout(), RegistryBlock.FOF_LOOT_GRASS);
 
-        // Entity Renderers
+        // Projectile Entity Renderers
         EntityRenderers.register(BoomerangEntity.TYPE, (dispatcher) -> new FlyingItemEntityRenderer<>(dispatcher, MinecraftClient.getInstance().getItemRenderer()));
         EntityRenderers.register(BombEntity.TYPE, (dispatcher) -> new FlyingItemEntityRenderer<>(dispatcher, MinecraftClient.getInstance().getItemRenderer()));
+
+        // Due to GeckoLib (Forge), entity renderers must be in both sides and registered appropriately.
+        // Entity Renderers
+        // EntityRenderers.register(DwellerBugEntity.TYPE, DwellerBugRenderer::new);
+        // EntityRenderers.register(AbominationSkeletonEntity.TYPE, AbominationSkeletonRenderer::new);
+        // EntityRenderers.register(NetherAbominationSkeletonEntity.TYPE, NetherAbominationSkeletonRenderer::new);
+        // EntityRenderers.register(GoliathWolfEntity.TYPE, GoliathWolfRenderer::new);
+        // EntityRenderers.register(EldritchGownEntity.TYPE, EldritchGownRenderer::new);
+        // EntityRenderers.register(AbominationSkeletonProjectileEntity.TYPE, AbominationSkeletonProjectileRenderer::new);
     }
 }

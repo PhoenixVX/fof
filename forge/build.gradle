@@ -13,6 +13,7 @@ architectury {
 
 loom {
     useFabricMixin = true
+    mixinConfig "FOF.mixins.json"
 }
 
 repositories {

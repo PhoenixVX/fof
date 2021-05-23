@@ -29,6 +29,11 @@ public class BoomerangEntity extends ThrownItemEntity {
     }
 
     @Override
+    public Packet<?> createSpawnPacket() {
+        return super.createSpawnPacket();
+    }
+
+    @Override
     protected Item getDefaultItem () {
         return RegistryItem.FOF_BOOMERANG;
     }

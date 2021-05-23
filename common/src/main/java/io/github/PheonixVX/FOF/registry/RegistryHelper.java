@@ -1,8 +1,10 @@
 package io.github.PheonixVX.FOF.registry;
 
 import io.github.PheonixVX.FOF.FOF;
+import io.github.PheonixVX.FOF.config.ModConfig;
 import me.shedaniel.architectury.registry.CreativeTabs;
 import me.shedaniel.architectury.registry.DeferredRegister;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -20,6 +22,8 @@ public class RegistryHelper {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(MOD_ID, Registry.ITEM_KEY);
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(MOD_ID, Registry.BLOCK_KEY);
     public static final @NotNull DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(MOD_ID, Registry.ENTITY_TYPE_KEY);
+
+    public static ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
     public static void initializeRegistries() {
         ITEMS.register();
