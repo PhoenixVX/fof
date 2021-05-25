@@ -34,7 +34,7 @@ public class AbstractAbominationSkeletonEntity extends HostileEntity implements 
     @Override
     protected void initGoals() {
         // Entity will walk around.
-        this.goalSelector.add(7, new WanderAroundFarGoal(this, 0.5D, 0.0F));
+        this.goalSelector.add(7, new WanderAroundFarGoal(this, 0.5D, 1.0F));
         // Entity will look at Player.
         this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 12.0F));
         // Entity will look around
@@ -52,27 +52,33 @@ public class AbstractAbominationSkeletonEntity extends HostileEntity implements 
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (!(lastLimbDistance > -0.15F && lastLimbDistance < 0.15F) && !this.isAttacking()) {
+        if (event.isMoving() && !this.isAttacking() && !this.lowHealth) {
             // Assume they are walking
-            event.getController().setAnimation(
-                    new AnimationBuilder().addAnimation("walking", true)
-            );
-            return PlayState.CONTINUE;
-        } else if (lowHealth) {
-            event.getController().setAnimation(
-                    new AnimationBuilder().addAnimation("head_bounce", false)
-            );
-            return PlayState.CONTINUE;
-        } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", true));
-            return PlayState.CONTINUE;
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("walking", false));
         }
+        return PlayState.CONTINUE;
+    }
+
+    private <E extends IAnimatable> PlayState headBounce(AnimationEvent<E> event) {
+        if (this.lowHealth) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("head_bounce", false));
+        }
+        return PlayState.CONTINUE;
+    }
+
+    private <E extends IAnimatable> PlayState idle(AnimationEvent<E> event) {
+        if (!event.isMoving() && !this.isAttacking() && !this.lowHealth) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", false));
+        }
+        return PlayState.CONTINUE;
     }
 
 
     @Override
     public void registerControllers(AnimationData animationData) {
         animationData.addAnimationController(new AnimationController<>(this, "controller", 0, this::predicate));
+        animationData.addAnimationController(new AnimationController<>(this, "controller1", 0, this::headBounce));
+        animationData.addAnimationController(new AnimationController<>(this, "controller2", 0, this::idle));
     }
 
     @Override

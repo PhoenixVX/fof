@@ -9,6 +9,8 @@ import io.github.PheonixVX.FOF.registry.RegistryHelper;
 import io.github.PheonixVX.FOF.renderers.*;
 import me.shedaniel.architectury.platform.forge.EventBuses;
 import me.shedaniel.architectury.registry.entity.EntityRenderers;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
