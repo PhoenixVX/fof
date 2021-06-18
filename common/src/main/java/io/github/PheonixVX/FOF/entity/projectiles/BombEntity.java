@@ -1,20 +1,23 @@
 package io.github.PheonixVX.FOF.entity.projectiles;
 
 import io.github.PheonixVX.FOF.registry.RegistryItem;
+import me.shedaniel.architectury.networking.NetworkManager;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.network.Packet;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 
 @SuppressWarnings("EntityConstructor")
-public class BombEntity extends ThrownItemEntity {
+public class BombEntity extends SnowballEntity {
     public static EntityType<BombEntity> TYPE = EntityType.Builder.create(BombEntity::new, SpawnGroup.MISC).setDimensions(0.25F, 0.25F).maxTrackingRange(4).trackingTickInterval(10).build("fof_bomb_entity");
 
-    public BombEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
+    public BombEntity(EntityType<? extends SnowballEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -34,4 +37,9 @@ public class BombEntity extends ThrownItemEntity {
         }
         this.remove();
     }
+
+    /*@Override
+    public Packet<?> createSpawnPacket() {
+        return NetworkManager.createAddEntityPacket(this);
+    }*/
 }

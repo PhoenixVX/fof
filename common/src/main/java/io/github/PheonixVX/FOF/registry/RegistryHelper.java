@@ -38,6 +38,6 @@ public class RegistryHelper {
         FOF.LOGGER.info("Initializing Entities");
         RegistryEntity.initializeEntities();
         FOF.LOGGER.info("Initializing Ores");
-        //RegistryOres.initializeOres();
+        RegistryBlock.initializeOres();
     }
 }

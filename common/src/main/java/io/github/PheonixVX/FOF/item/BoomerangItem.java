@@ -29,10 +29,9 @@ public class BoomerangItem extends Item {
             world.spawnEntity(boomerangEntity);
 
             playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
-            if (!playerEntity.abilities.creativeMode) {
+            if (!playerEntity.isCreative()) {
                 // Damage the boomerang after throwing
-                itemStack.damage(1, (ServerPlayerEntity) playerEntity, (entity) -> {
-                });
+                itemStack.damage(1, (ServerPlayerEntity) playerEntity, null);
             }
         }
 

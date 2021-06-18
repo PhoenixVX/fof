@@ -27,10 +27,10 @@ public class FOF {
     
     public static void init() {
         //ITEMS.register();
-        EnvExecutor.runInEnv(EnvType.CLIENT, FOFClientProxy::new);
-
         LOGGER.info("Forge of Fiends is loading...");
         AutoConfig.register(ModConfig.class, Toml4jConfigSerializer::new);
+        EnvExecutor.runInEnv(EnvType.CLIENT, FOFClientProxy::new);
+
         RegistryHelper.initializeRegistries();
     }
 }

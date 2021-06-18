@@ -3,6 +3,7 @@ package io.github.PheonixVX.FOF.entity.projectiles;
 import io.github.PheonixVX.FOF.FOFExpectedPlatform;
 import io.github.PheonixVX.FOF.proxy.FOFClientProxy;
 import io.github.PheonixVX.FOF.registry.RegistryItem;
+import me.shedaniel.architectury.networking.NetworkManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -26,11 +27,6 @@ public class BoomerangEntity extends ThrownItemEntity {
 
     public BoomerangEntity (EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);
-    }
-
-    @Override
-    public Packet<?> createSpawnPacket() {
-        return super.createSpawnPacket();
     }
 
     @Override
@@ -64,5 +60,10 @@ public class BoomerangEntity extends ThrownItemEntity {
         if (!this.world.isClient) {
             this.remove();
         }
+    }
+
+    @Override
+    public Packet<?> createSpawnPacket() {
+        return NetworkManager.createAddEntityPacket(this);
     }
 }
