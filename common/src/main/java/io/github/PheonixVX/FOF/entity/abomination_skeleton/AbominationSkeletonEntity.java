@@ -17,6 +17,8 @@ public class AbominationSkeletonEntity extends AbstractAbominationSkeletonEntity
     }
 
     public static DefaultAttributeContainer.Builder createAbominationSkeletonEntityAttributes() {
-        return AbominationSkeletonEntity.createMobAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.ABOMINATION_SKELETON_ATTACK_DAMAGE).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.ABOMINATION_SKELETON_MOVEMENT_SPEED);
+        return AbominationSkeletonEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.ABOMINATION_SKELETON_ATTACK_DAMAGE)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.ABOMINATION_SKELETON_MOVEMENT_SPEED);
     }
 }

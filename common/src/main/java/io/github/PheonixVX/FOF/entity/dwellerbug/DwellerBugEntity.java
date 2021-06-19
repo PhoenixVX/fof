@@ -32,7 +32,9 @@ public class DwellerBugEntity extends HostileEntity implements Monster, IAnimata
     }
 
     public static DefaultAttributeContainer.Builder createDwellerBugAttributes() {
-        return DwellerBugEntity.createMobAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.DWELLER_BUG_ATTACK_DAMAGE).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.DWELLER_BUG_MOVEMENT_SPEED);
+        return DwellerBugEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.DWELLER_BUG_ATTACK_DAMAGE)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.DWELLER_BUG_MOVEMENT_SPEED);
     }
 
     @Override
@@ -53,27 +55,28 @@ public class DwellerBugEntity extends HostileEntity implements Monster, IAnimata
 
     // Animation stuff
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (!(lastLimbDistance > -0.15F && lastLimbDistance < 0.15F) && !this.isAttacking()) {
+        /*if (event.isMoving() && !this.isAttacking()) {
             event.getController().setAnimation(
                     new AnimationBuilder().addAnimation("walking", true)
             );
             return PlayState.CONTINUE;
-        }
-        if (this.isAttacking()) {
+        } else*/ if (this.isAttacking()) {
             event.getController().setAnimation(
                     new AnimationBuilder().addAnimation("bite", true)
             );
             return PlayState.CONTINUE;
-        }
-		/*else if (this.isSpitting) {
+
+        /*else if (this.isSpitting) {
 			event.getController().setAnimation(
 				new AnimationBuilder().addAnimation("spitting", true)
 			);
 		}*/
-        event.getController().setAnimation(
-                new AnimationBuilder().addAnimation("idle", true)
-        );
-        return PlayState.CONTINUE;
+        } else {
+            event.getController().setAnimation(
+                    new AnimationBuilder().addAnimation("idle", true)
+            );
+            return PlayState.CONTINUE;
+        }
     }
 
     @Override

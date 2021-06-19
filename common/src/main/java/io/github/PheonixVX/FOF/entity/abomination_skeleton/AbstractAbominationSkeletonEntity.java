@@ -55,30 +55,17 @@ public class AbstractAbominationSkeletonEntity extends HostileEntity implements 
         if (event.isMoving() && !this.isAttacking() && !this.lowHealth) {
             // Assume they are walking
             event.getController().setAnimation(new AnimationBuilder().addAnimation("walking", false));
-        }
-        return PlayState.CONTINUE;
-    }
-
-    private <E extends IAnimatable> PlayState headBounce(AnimationEvent<E> event) {
-        if (this.lowHealth) {
+        } else if (this.lowHealth) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("head_bounce", false));
-        }
-        return PlayState.CONTINUE;
-    }
-
-    private <E extends IAnimatable> PlayState idle(AnimationEvent<E> event) {
-        if (!event.isMoving() && !this.isAttacking() && !this.lowHealth) {
+        } else if (!event.isMoving() && !this.isAttacking() && !this.lowHealth) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", false));
         }
         return PlayState.CONTINUE;
     }
 
-
     @Override
     public void registerControllers(AnimationData animationData) {
         animationData.addAnimationController(new AnimationController<>(this, "controller", 0, this::predicate));
-        animationData.addAnimationController(new AnimationController<>(this, "controller1", 0, this::headBounce));
-        animationData.addAnimationController(new AnimationController<>(this, "controller2", 0, this::idle));
     }
 
     @Override

@@ -21,7 +21,9 @@ public class NetherAbominationSkeletonEntity extends AbstractAbominationSkeleton
     }
 
     public static DefaultAttributeContainer.Builder createNetherAbominationSkeletonEntityAttributes() {
-        return NetherAbominationSkeletonEntity.createMobAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.NETHER_ABOMINATION_SKELETON_ATTACK_DAMAGE).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.NETHER_ABOMINATION_SKELETON_MOVEMENT_SPEED);
+        return NetherAbominationSkeletonEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.NETHER_ABOMINATION_SKELETON_ATTACK_DAMAGE)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.NETHER_ABOMINATION_SKELETON_MOVEMENT_SPEED);
     }
 
     @Override
