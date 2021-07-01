@@ -37,7 +37,10 @@ public class EldritchGownEntity extends HostileEntity implements Monster, IAnima
 	}
 
 	public static DefaultAttributeContainer.Builder createEldritchGownAttributes() {
-		return EldritchGownEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, RegistryHelper.config.ELDRITCH_GOWN_MAX_HEALTH).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.ELDRITCH_GOWN_ATTACK_DAMAGE);
+		return EldritchGownEntity.createMobAttributes()
+				.add(EntityAttributes.GENERIC_MAX_HEALTH, RegistryHelper.config.ELDRITCH_GOWN_MAX_HEALTH)
+				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.ELDRITCH_GOWN_ATTACK_DAMAGE)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.ELDRITCH_GOWN_MOVEMENT_SPEED);
 	}
 
 	@Override
@@ -56,12 +59,10 @@ public class EldritchGownEntity extends HostileEntity implements Monster, IAnima
 		this.targetSelector.add(3, new RevengeGoal(this));
 	}
 
-	private <E extends IAnimatable> PlayState predicate (AnimationEvent<E> event) {
-		if (!(lastLimbDistance > -0.15F && lastLimbDistance < 0.15F) && !this.isAttacking()) {
+	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+		if (event.isMoving()) {
 			// Assume they are walking
-			event.getController().setAnimation(
-				new AnimationBuilder().addAnimation("walking", true)
-			);
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("walking", true));
 			return PlayState.CONTINUE;
 		}
 		event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", true));

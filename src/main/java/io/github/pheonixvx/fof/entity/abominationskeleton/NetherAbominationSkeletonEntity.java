@@ -3,9 +3,12 @@ package io.github.pheonixvx.fof.entity.abominationskeleton;
 import io.github.pheonixvx.fof.entity.abominationskeleton.AbstractAbominationSkeletonEntity;
 import io.github.pheonixvx.fof.entity.projectiles.AbominationSkeletonProjectileEntity;
 import io.github.pheonixvx.fof.registry.RegistryEntity;
+import io.github.pheonixvx.fof.registry.RegistryHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
@@ -18,7 +21,7 @@ public class NetherAbominationSkeletonEntity extends AbstractAbominationSkeleton
 		super(entityType, world);
 	}
 
-	@Override
+	/*@Override
 	public boolean tryAttack (Entity target) {
 		if (target instanceof LivingEntity) {
 			((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 200));
@@ -30,5 +33,11 @@ public class NetherAbominationSkeletonEntity extends AbstractAbominationSkeleton
 			super.tryAttack(target);
 		}
 		return true;
+	}*/
+
+	public static DefaultAttributeContainer.Builder createNetherAbominationSkeletonEntityAttributes() {
+		return NetherAbominationSkeletonEntity.createMobAttributes()
+				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.NETHER_ABOMINATION_SKELETON_ATTACK_DAMAGE)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.NETHER_ABOMINATION_SKELETON_MOVEMENT_SPEED);
 	}
 }

@@ -7,20 +7,21 @@ import me.shedaniel.autoconfig.annotation.Config;
 @Config(name = "fof")
 public class ModConfig implements ConfigData {
 	public int DWELLER_BUG_ATTACK_DAMAGE = 7;
-	public float DWELLER_BUG_MOVEMENT_SPEED = 0.425F;
+	public double DWELLER_BUG_MOVEMENT_SPEED = 0.2725D;
 
 	public int ABOMINATION_SKELETON_ATTACK_DAMAGE = 5;
-	public float ABOMINATION_SKELETON_MOVEMENT_SPEED = 0.2625F;
+	public double ABOMINATION_SKELETON_MOVEMENT_SPEED = 0.2625D;
 
 	public int NETHER_ABOMINATION_SKELETON_ATTACK_DAMAGE = 5;
-	public float NETHER_ABOMINATION_SKELETON_MOVEMENT_SPEED = 0.2625F;
+	public double NETHER_ABOMINATION_SKELETON_MOVEMENT_SPEED = 0.2625D;
 
 	public int GOLIATH_WOLF_MAX_HEALTH = 50;
 	public int GOLIATH_WOLF_ATTACK_DAMAGE = 8;
-	public float GOLIATH_WOLF_MOVEMENT_SPEED = 0.35F;
+	public double GOLIATH_WOLF_MOVEMENT_SPEED = 0.35D;
 
 	public int ELDRITCH_GOWN_MAX_HEALTH = 30;
 	public int ELDRITCH_GOWN_ATTACK_DAMAGE = 3;
+	public double ELDRITCH_GOWN_MOVEMENT_SPEED = 0.2625D;
 
 	// Spawning parameters (Weights, minimum group size, maximum group size)
 	public int DWELLER_BUG_WEIGHT = 10;

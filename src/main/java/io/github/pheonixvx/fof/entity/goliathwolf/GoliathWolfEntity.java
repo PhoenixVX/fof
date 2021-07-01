@@ -45,7 +45,10 @@ public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnim
 	}
 
 	public static DefaultAttributeContainer.Builder createGoliathWolfAttributes() {
-		return GoliathWolfEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, RegistryHelper.config.GOLIATH_WOLF_MAX_HEALTH).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.GOLIATH_WOLF_ATTACK_DAMAGE).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.GOLIATH_WOLF_MOVEMENT_SPEED);
+		return GoliathWolfEntity.createMobAttributes()
+				.add(EntityAttributes.GENERIC_MAX_HEALTH, RegistryHelper.config.GOLIATH_WOLF_MAX_HEALTH)
+				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.GOLIATH_WOLF_ATTACK_DAMAGE)
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.GOLIATH_WOLF_MOVEMENT_SPEED);
 	}
 
 	@Override
@@ -64,22 +67,14 @@ public class GoliathWolfEntity extends HorseBaseEntity implements Monster, IAnim
 		this.targetSelector.add(3, new RevengeGoal(this));
 	}
 
-	private <E extends IAnimatable> PlayState predicate (AnimationEvent<E> event) {
-		if (!(lastLimbDistance > -0.15F && lastLimbDistance < 0.15F) && !this.isAttacking()) {
-			event.getController().setAnimation(
-				new AnimationBuilder().addAnimation("walking", true)
-			);
-			return PlayState.CONTINUE;
+	private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+		if (event.isMoving() && !this.isAttacking()) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("walking", false));
+		} else if (this.isAttacking()) {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("bite", false));
+		} else {
+			event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", false));
 		}
-		if (this.isAttacking()) {
-			event.getController().setAnimation(
-				new AnimationBuilder().addAnimation("bite", true)
-			);
-			return PlayState.CONTINUE;
-		}
-		event.getController().setAnimation(
-			new AnimationBuilder().addAnimation("idle", true)
-		);
 		return PlayState.CONTINUE;
 	}
 

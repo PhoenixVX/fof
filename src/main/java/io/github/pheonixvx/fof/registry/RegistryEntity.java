@@ -14,7 +14,6 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -76,8 +75,7 @@ public class RegistryEntity {
 			.build()
 	);
 
-	public static final EntityType<NetherAbominationSkeletonEntity> NETHER_ABOMINATION_SKELETON_ENTITY_TYPE
-		= Registry.register(
+	public static final EntityType<NetherAbominationSkeletonEntity> NETHER_ABOMINATION_SKELETON_ENTITY_TYPE = Registry.register(
 		Registry.ENTITY_TYPE,
 		new Identifier(RegistryHelper.MOD_ID, "fof_nether_abomination_skeleton"),
 		FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, NetherAbominationSkeletonEntity::new)
@@ -105,8 +103,8 @@ public class RegistryEntity {
 		FabricDefaultAttributeRegistry.register(DWELLER_BUG_ENTITY_TYPE, DwellerBugEntity.createDwellerBugAttributes());
 
 		// TO-DO: Simplify Abomination Skeleton Attributes
-		FabricDefaultAttributeRegistry.register(ABOMINATION_SKELETON_ENTITY_TYPE, AbominationSkeletonEntity.createMobAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.ABOMINATION_SKELETON_ATTACK_DAMAGE).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.ABOMINATION_SKELETON_MOVEMENT_SPEED));
-		FabricDefaultAttributeRegistry.register(NETHER_ABOMINATION_SKELETON_ENTITY_TYPE, NetherAbominationSkeletonEntity.createMobAttributes().add(EntityAttributes.GENERIC_ATTACK_DAMAGE, RegistryHelper.config.NETHER_ABOMINATION_SKELETON_ATTACK_DAMAGE).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, RegistryHelper.config.NETHER_ABOMINATION_SKELETON_MOVEMENT_SPEED));
+		FabricDefaultAttributeRegistry.register(ABOMINATION_SKELETON_ENTITY_TYPE, AbominationSkeletonEntity.createAbominationSkeletonEntityAttributes());
+		FabricDefaultAttributeRegistry.register(NETHER_ABOMINATION_SKELETON_ENTITY_TYPE, NetherAbominationSkeletonEntity.createNetherAbominationSkeletonEntityAttributes());
 
 		FabricDefaultAttributeRegistry.register(GOLIATH_WOLF_ENTITY_TYPE, GoliathWolfEntity.createGoliathWolfAttributes());
 		FabricDefaultAttributeRegistry.register(ELDRITCH_GOWN_ENTITY_TYPE, EldritchGownEntity.createEldritchGownAttributes());

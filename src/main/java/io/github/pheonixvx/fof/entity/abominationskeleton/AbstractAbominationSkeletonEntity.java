@@ -52,21 +52,15 @@ public class AbstractAbominationSkeletonEntity extends HostileEntity implements 
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (!(lastLimbDistance > -0.15F && lastLimbDistance < 0.15F) && !this.isAttacking()) {
+        if (event.isMoving() && !this.isAttacking() && !this.lowHealth) {
             // Assume they are walking
-            event.getController().setAnimation(
-                    new AnimationBuilder().addAnimation("walking", true)
-            );
-            return PlayState.CONTINUE;
-        } else if (lowHealth) {
-            event.getController().setAnimation(
-                    new AnimationBuilder().addAnimation("head_bounce", false)
-            );
-            return PlayState.CONTINUE;
-        } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", true));
-            return PlayState.CONTINUE;
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("walking", false));
+        } else if (this.lowHealth) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("head_bounce", false));
+        } else if (!event.isMoving() && !this.isAttacking() && !this.lowHealth) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", false));
         }
+        return PlayState.CONTINUE;
     }
 
 
